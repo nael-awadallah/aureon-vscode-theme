@@ -120,11 +120,12 @@ const roles: { role: keyof Palette["syntax"]; name: string; sample: string; note
   { role: "type", name: "Classes, types and enums", sample: "class Circle", note: "The shape of your data" },
   { role: "interface", name: "Interfaces and type parameters", sample: "Shape<T>", note: "A lighter step of the type color" },
   { role: "parameter", name: "Parameters", sample: "radius", note: "Italic, so inputs stand out" },
-  { role: "property", name: "Properties", sample: "this.colors", note: "Members, keys and fields" },
+  { role: "property", name: "Properties", sample: "this.colors", note: "Neutral, so member chains stay calm" },
   { role: "constant", name: "Enum members and literals", sample: "Level.High", note: "Numbers, booleans, constants" },
-  { role: "keyword", name: "Keywords", sample: "export async", note: "Structure, italic" },
+  { role: "keyword", name: "Keywords", sample: "const class", note: "Declarations and modifiers, italic" },
+  { role: "control", name: "Control flow", sample: "if return await", note: "Where the code branches or exits" },
   { role: "string", name: "Strings", sample: '"Choose a set"', note: "Text and data" },
-  { role: "variable", name: "Variables", sample: "const items", note: "Neutral on purpose" },
+  { role: "variable", name: "Variables", sample: "items", note: "Locals and constants, easy to spot" },
   { role: "comment", name: "Comments", sample: "// why, not what", note: "Quiet, italic" },
 ];
 const swatches = Object.fromEntries(base.map((v) => [v.id, Object.fromEntries(roles.map((r) => [r.role, v.palette.syntax[r.role]]))]));

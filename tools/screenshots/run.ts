@@ -104,7 +104,7 @@ const compareWords: Record<string, [string, number, string][]> = {
   ],
 };
 const compareFiles =["suite.cjs", "semantic.ts", "Component.tsx", "UserController.php", "palette.py", "styles.css"];
-const compareThemes = ["Dark 2026", ...(process.env.AUREON_COMPARE_THEMES ?? "Aureon Dark").split(",")];
+const compareThemes = [process.env.AUREON_COMPARE_BASE ?? "Dark 2026", ...(process.env.AUREON_COMPARE_THEMES ?? "Aureon Dark").split(",")];
 const shots: Shot[] = compare
   ? compareFiles.flatMap((file) =>
       compareThemes.map((label) => ({

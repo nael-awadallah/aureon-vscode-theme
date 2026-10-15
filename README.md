@@ -14,7 +14,7 @@
 A refined, modern theme family for focused development. Calm surfaces, a gold thread that runs through every variant, and syntax colors that tell you **what each symbol is** — not just that it's code.
 
 - **Three moods, one design:** Aureon Dark, Aureon Dusk and Aureon Light, each with a **Vivid** version (solid accent status bar) and a **No Italics** version.
-- **Semantic highlighting built in:** functions, methods, classes, interfaces, parameters and properties each have their own color, and ordinary variables stay calm. It works out of the box for TypeScript and JavaScript, with no extra extensions.
+- **Semantic highlighting built in:** functions, methods, classes, interfaces, variables and parameters each have their own color, and control flow (`if`, `for`, `return`, `await`) stands apart from declarations. It works out of the box for TypeScript and JavaScript, with no extra extensions.
 - **The whole UI, not just the editor:** more than 820 workbench colors, so chat, debugging, testing, notebooks, the merge editor and the source control graph all match. No stock VS Code blue left anywhere.
 - **Easy on the eyes:** every text color is checked against WCAG contrast, with a ceiling too, so nothing glares.
 
@@ -62,20 +62,21 @@ Warm paper with deep amber accents, for daylight. Every accent is dark enough to
 
 ## Semantic colors
 
-Color means something. Related roles share a hue family, and anything that appears on most lines stays neutral.
+Color means something. Each kind of symbol has its own hue, following the structure of VS Code's 2026 themes, while operators and punctuation stay quiet so names stand out.
 
 | Role | Dark | Dusk | Light | Style |
 | --- | --- | --- | --- | --- |
-| Functions & methods | `#E5B567` | `#4FD1C5` | `#9A5B13` | |
-| Classes, types, enums, namespaces | `#8FAFC0` | `#7FB3D5` | `#1D4ED8` | |
-| Interfaces & type parameters | `#A9C4D3` | `#9CC8E6` | `#2F6FB0` | |
-| Parameters | `#D6C3A5` | `#E0C7A3` | `#8A4B2A` | italic |
-| Properties | `#CDC6D9` | `#AEBBD0` | `#3F5A6E` | |
-| Enum members & literals | `#D9986A` | `#E9A27C` | `#B4421A` | |
-| Keywords | `#B6A0D1` | `#A78BFA` | `#6D28D9` | italic |
-| Strings | `#A8BE91` | `#9FD79F` | `#2F7D32` | |
-| Variables | `#D9D2C7` | `#D2D5DB` | `#34322F` | |
-| Comments | `#7A7268` | `#6E7686` | `#7D766C` | italic |
+| Functions & methods | `#D2A8FF` | `#C4A7FF` | `#8250DF` |  |
+| Classes, types, enums, namespaces | `#4EC9B0` | `#4FD1C5` | `#22738A` |  |
+| Interfaces & type parameters | `#72D6C2` | `#86E1D7` | `#1B6E66` |  |
+| Variables | `#79C0FF` | `#82AAFF` | `#0550AE` |  |
+| Parameters | `#FFA657` | `#F7A86E` | `#953800` | italic |
+| Properties | `#C9D1D9` | `#C3CAD6` | `#1F2328` |  |
+| Keywords (declarations, modifiers) | `#FF7B72` | `#F7768E` | `#CF222E` | italic |
+| Control flow (`if`, `for`, `return`, `await`) | `#C586C0` | `#E58FD4` | `#AF00DB` | italic |
+| Numbers, booleans, enum members | `#B5CEA8` | `#B4D9A0` | `#077A4F` |  |
+| Strings | `#A5D6FF` | `#A3CFF7` | `#0A3069` |  |
+| Comments | `#8B949E` | `#737D8F` | `#6E7781` | italic |
 
 A declaration and its uses always share a color. Symbol icons in suggestions and the outline follow the same roles.
 

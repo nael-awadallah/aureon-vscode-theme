@@ -38,26 +38,29 @@ export const light: Palette = {
 
   shadow: "#3A2A1424",
 
+  // Syntax colors follow VS Code's Light 2026 (measured from the rendered
+  // editor); teal types and green numbers are a shade darker to pass 4.5:1
+  // on Aureon's warm paper.
   syntax: {
-    variable: "#34322F",
-    function: "#9A5B13",
-    type: "#1D4ED8",
-    interface: "#2F6FB0",
-    parameter: "#8A4B2A",
-    property: "#3F5A6E",
-    constant: "#B4421A",
-    keyword: "#6D28D9",
-    control: "#6D28D9",
-    string: "#2F7D32",
-    escape: "#0F766E",
-    decorator: "#BE185D",
-    tag: "#A8324A",
-    attribute: "#8A5F00",
+    variable: "#0550AE",
+    function: "#8250DF",
+    type: "#22738A",
+    interface: "#1B6E66",
+    parameter: "#953800",
+    property: "#1F2328",
+    constant: "#077A4F",
+    keyword: "#CF222E",
+    control: "#AF00DB",
+    string: "#0A3069",
+    escape: "#116329",
+    decorator: "#8250DF",
+    tag: "#116329",
+    attribute: "#0550AE",
     operator: "#625D56",
     punctuation: "#7A746B",
-    comment: "#7D766C",
-    docTag: "#6B5FA8",
-    invalid: "#C62828",
+    comment: "#6E7781",
+    docTag: "#0550AE",
+    invalid: "#82071E",
   },
 
   status: {

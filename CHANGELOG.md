@@ -2,6 +2,14 @@
 
 All notable changes to **Aureon** are documented here.
 
+## [Unreleased]
+
+- New syntax palette for all three themes, built on the structure of VS Code's 2026 themes: blue variables, orange parameters, violet functions, teal types and interfaces, and coral keywords. Each was measured from the rendered editor and tuned for Aureon's backgrounds (Light's teal and green are a shade darker to stay readable on warm paper)
+- Control flow (`if`, `for`, `return`, `await`, `import`/`export`) has its own color, separate from declarations
+- Properties stay neutral, so long member chains stay calm
+- The interface keeps Aureon's gold (Dark), teal (Dusk) and amber (Light) accents
+- README: link to the live preview website
+
 ## [0.2.0] — 2026-10-15
 
 - **No Italics** versions of Aureon Dark, Dusk and Light: the same colors with upright comments, keywords and parameters
