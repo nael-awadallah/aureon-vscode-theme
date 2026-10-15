@@ -53,6 +53,9 @@ export const expectations: Record<string, Expectation[]> = {
     ["resolve", 0, "function", "function"],
     ["value", 0, "parameter", "parameter"],
     ["value", 1, "parameter", "variable"],
+    ["return", 0, null, "control"],
+    ["for", 0, null, "control"],
+    ["const", 0, null, "keyword"],
   ],
 
   "semantic.js": [
@@ -142,6 +145,9 @@ export const expectations: Record<string, Expectation[]> = {
     ["users", 1, null, "property"], // $this->users
     ["int", 0, null, "type"],
     ["Route", 0, null, "decorator"],
+    ["if", 0, null, "control"],
+    ["return", 0, null, "control"],
+    ["function", 0, null, "keyword"],
   ],
 
   "README.md": [
@@ -181,5 +187,7 @@ export const expectations: Record<string, Expectation[]> = {
     ["colors", 3, null, "property"], // len(self.colors)
     ["build", 0, null, "function"],
     ["True", 0, null, "constant"],
+    ["import", 0, null, "control"],
+    ["def", 0, null, "keyword"],
   ],
 };

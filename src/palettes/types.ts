@@ -49,7 +49,8 @@ export interface Palette {
     parameter: string;
     property: string;
     constant: string; // numbers, booleans, enum members, module constants
-    keyword: string; // also this / self
+    keyword: string; // declarations and modifiers; also this / self
+    control: string; // control flow: if, for, return, await, import / export
     string: string;
     escape: string; // string escapes, regexp
     decorator: string;

@@ -47,6 +47,7 @@ export const dusk: Palette = {
     property: "#AEBBD0",
     constant: "#E9A27C",
     keyword: "#A78BFA",
+    control: "#A78BFA",
     string: "#9FD79F",
     escape: "#E6A6D0",
     decorator: "#E79AB0",

@@ -908,6 +908,16 @@
       }
     },
     {
+      "name": "Control flow",
+      "scope": [
+        "keyword.control"
+      ],
+      "settings": {
+        "foreground": "#C586C0",
+        "fontStyle": "italic"
+      }
+    },
+    {
       "name": "Operators",
       "scope": [
         "keyword.operator",

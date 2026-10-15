@@ -50,6 +50,7 @@ export const dark: Palette = {
     property: "#C9D1D9",
     constant: "#B5CEA8",
     keyword: "#FF7B72",
+    control: "#C586C0",
     string: "#A5D6FF",
     escape: "#7EE787",
     decorator: "#D2A8FF",

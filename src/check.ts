@@ -15,7 +15,7 @@ const subtleRoles = new Set(["comment", "punctuation"]);
 // hue family (classes and interfaces) only need one clear lightness step.
 const DISTINCT = 10;
 const FAMILY = 6;
-const semanticRoles = ["variable", "function", "type", "interface", "parameter", "property", "constant", "keyword", "string"] as const;
+const semanticRoles = ["variable", "function", "type", "interface", "parameter", "property", "constant", "keyword", "control", "string"] as const;
 const families = new Set(["type/interface"]);
 
 let failed = 0;
@@ -37,6 +37,8 @@ function checkPalette(p: Palette) {
     for (let j = i + 1; j < semanticRoles.length; j++) {
       const pair = `${semanticRoles[i]}/${semanticRoles[j]}`;
       const d = deltaE(p.syntax[semanticRoles[i]], p.syntax[semanticRoles[j]]);
+      // A palette may merge control keywords into keywords on purpose.
+      if (pair === "keyword/control" && d === 0) continue;
       const min = families.has(pair) ? FAMILY : DISTINCT;
       if (d < min) {
         console.log(`  FAIL ${("distinct " + pair).padEnd(44)} ΔE ${d.toFixed(1)} < ${min}`);

@@ -46,6 +46,7 @@ export function textmate(p: Palette, o: VariantOptions): TokenColor[] {
 
     // ── Keywords, operators, punctuation ───────────────────
     rule("Keywords", ["keyword", "storage.type", "storage.modifier", "keyword.other.import", "variable.language.super"], s.keyword, italic),
+    rule("Control flow", ["keyword.control"], s.control, italic),
     rule("Operators", ["keyword.operator", "storage.type.function.arrow"], s.operator, ""),
     rule("Word operators", [
       "keyword.operator.new",

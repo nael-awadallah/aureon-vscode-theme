@@ -47,6 +47,7 @@ export const light: Palette = {
     property: "#3F5A6E",
     constant: "#B4421A",
     keyword: "#6D28D9",
+    control: "#6D28D9",
     string: "#2F7D32",
     escape: "#0F766E",
     decorator: "#BE185D",
