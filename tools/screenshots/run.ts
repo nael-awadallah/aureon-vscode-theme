@@ -91,37 +91,6 @@ const shots: Shot[] = variants
     select: { near: "this.radius = radius", offset: 5, length: 6 }, // "radius"
   }));
 
-// Hero: large, readable code with callouts on each semantic role.
-shots.push({
-  ...base,
-  label: "Aureon Dark Vivid",
-  out: join(outDir, "hero-main.png"),
-  tabs: ["Component.tsx", "semantic.ts"],
-  width: 1240,
-  height: 775,
-  fontSize: 17,
-  sidebar: false,
-  minimap: false,
-  top: 4,
-  cursor: { near: "    this.id = id;" },
-  callouts: [
-    { word: "Low", nth: 0, label: "Enum member", role: "constant" },
-    { word: "Shape", nth: 0, label: "Interface", role: "interface" },
-    { word: "area", nth: 0, label: "Method", role: "function" },
-    { word: "Circle", nth: 0, label: "Class", role: "type" },
-    { word: "radius", nth: 0, label: "Property", role: "property" },
-    { word: "radius", nth: 1, label: "Parameter", role: "parameter" },
-  ],
-});
-
-// Hero cards: a different language per theme, to show the range.
-const card = { ...base, width: 1280, height: 800, fontSize: 15, minimap: false };
-shots.push(
-  { ...card, label: "Aureon Dark Vivid", out: join(outDir, "card-dark.png"), tabs: ["semantic.ts", "Component.tsx"], cursor: { near: "  return (" } },
-  { ...card, label: "Aureon Dusk Vivid", out: join(outDir, "card-dusk.png"), tabs: ["semantic.ts", "UserController.php"], top: 9, cursor: { near: "    public function index" } },
-  { ...card, label: "Aureon Light Vivid", out: join(outDir, "card-light.png"), tabs: ["semantic.ts", "README.md"], cursor: { near: "## Text" } },
-);
-
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 /** Minimal Chrome DevTools Protocol client over the built-in WebSocket. */
