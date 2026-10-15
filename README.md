@@ -12,7 +12,7 @@
 
 A refined, modern theme family for focused development. Calm surfaces, a gold thread that runs through every variant, and syntax colors that tell you **what each symbol is** — not just that it's code.
 
-- **Three moods, one design:** Aureon Dark, Aureon Dusk and Aureon Light, each with a **Vivid** version that has a solid accent status bar.
+- **Three moods, one design:** Aureon Dark, Aureon Dusk and Aureon Light, each with a **Vivid** version (solid accent status bar) and a **No Italics** version.
 - **Semantic highlighting built in:** functions, methods, classes, interfaces, parameters and properties each have their own color, and ordinary variables stay calm. It works out of the box for TypeScript and JavaScript, with no extra extensions.
 - **The whole UI, not just the editor:** more than 820 workbench colors, so chat, debugging, testing, notebooks, the merge editor and the source control graph all match. No stock VS Code blue left anywhere.
 - **Easy on the eyes:** every text color is checked against WCAG contrast, with a ceiling too, so nothing glares.
@@ -43,6 +43,20 @@ Warm paper with deep amber accents, for daylight. Every accent is dark enough to
 
 ![Aureon Dark Vivid](https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/screenshots/aureon-dark-vivid.png)
 
+### No Italics versions
+
+**Aureon Dark No Italics**, **Aureon Dusk No Italics** and **Aureon Light No Italics** keep every color but set comments, keywords and parameters upright. Pick these if your font has no italic, or a weak one.
+
+### Which one is for me?
+
+| You want… | Pick |
+| --- | --- |
+| The signature warm, dark look | **Aureon Dark** |
+| Something cooler for night sessions | **Aureon Dusk** |
+| Daylight, bright rooms, or a projector | **Aureon Light** |
+| A status bar you can spot from across the room | any **Vivid** version |
+| Upright code with a font that has no good italic | any **No Italics** version |
+
 ## Semantic colors
 
 Color means something. Related roles share a hue family, and anything that appears on most lines stays neutral.
@@ -62,7 +76,7 @@ Color means something. Related roles share a hue family, and anything that appea
 
 A declaration and its uses always share a color. Symbol icons in suggestions and the outline follow the same roles.
 
-**Language support.** TypeScript, JavaScript, TSX and JSX get full semantic colors from VS Code's built-in TypeScript support. CSS, HTML, JSON, PHP, Python and others use carefully scoped grammar colors. If you use [Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) (PHP) or [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) (Python), their semantic tokens pick up the same colors automatically.
+**Language support.** TypeScript, JavaScript, TSX and JSX get full semantic colors from VS Code's built-in TypeScript support. CSS, HTML, JSON, YAML, Markdown, `.env`, PHP, Python and others use carefully scoped grammar colors. If you use [Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) (PHP) or [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) (Python), their semantic tokens pick up the same colors automatically.
 
 ## Install
 
@@ -94,7 +108,7 @@ Aureon looks its best with a modern coding font and a little breathing room:
 }
 ```
 
-Comments, keywords and parameters are italic. Fonts with a well-drawn italic, such as JetBrains Mono, Cascadia Code or Monaspace, make that shine.
+Comments, keywords and parameters are italic. Fonts with a well-drawn italic, such as JetBrains Mono, Cascadia Code or Monaspace, make that shine. If yours doesn't have one, use a **No Italics** version.
 
 ## Feedback
 

@@ -11,6 +11,8 @@ export interface TokenColor {
 // Rules use specific scopes taken from VS Code's own grammars, never bare
 // `variable`, `entity`, `support` or `meta.*`, so a broad rule can't override
 // a more precise classification. Each role mirrors the semantic map in semantic.ts.
+const text = (p: Palette) => p.syntax.variable;
+
 export function textmate(p: Palette, o: VariantOptions): TokenColor[] {
   const s = p.syntax;
   const italic = o.italics ? "italic" : "";
@@ -179,12 +181,34 @@ export function textmate(p: Palette, o: VariantOptions): TokenColor[] {
     rule("JSON keys", ["support.type.property-name.json", "punctuation.support.type.property-name.json"], s.property),
 
     // ── Markdown ───────────────────────────────────────────
-    rule("Markdown headings", ["markup.heading", "entity.name.section", "punctuation.definition.heading"], p.accent.base, "bold"),
-    rule("Markdown bold", ["markup.bold"], undefined, "bold"),
-    rule("Markdown italic", ["markup.italic"], undefined, "italic"),
-    rule("Markdown code", ["markup.inline.raw", "markup.fenced_code.block"], s.string),
-    rule("Markdown links", ["markup.underline.link", "string.other.link"], s.type),
+    rule("Markdown headings", ["markup.heading", "entity.name.section.markdown"], s.function, "bold"),
+    rule("Markdown heading marks", ["punctuation.definition.heading.markdown"], p.accent.deep, "bold"),
+    rule("Markdown bold", ["markup.bold"], text(p), "bold"),
+    rule("Markdown italic", ["markup.italic"], text(p), "italic"),
+    rule("Markdown bold italic", ["markup.bold markup.italic", "markup.italic markup.bold"], text(p), "bold italic"),
+    rule("Markdown strikethrough", ["markup.strikethrough"], s.comment, "strikethrough"),
+    rule("Markdown emphasis marks", ["punctuation.definition.bold.markdown", "punctuation.definition.italic.markdown", "punctuation.definition.strikethrough.markdown"], s.punctuation, ""),
+    rule("Markdown inline code", ["markup.inline.raw"], s.string, ""),
+    rule("Markdown code fences", ["markup.fenced_code.block", "markup.raw.block"], s.string, ""),
+    rule("Markdown fence language", ["fenced_code.block.language"], s.keyword, ""),
+    rule("Markdown link text", ["string.other.link.title", "string.other.link.description"], s.type, ""),
+    rule("Markdown URLs", ["markup.underline.link", "markup.underline.link.image"], s.comment, "underline"),
+    rule("Markdown list bullets", ["punctuation.definition.list.begin.markdown", "beginning.punctuation.definition.list.markdown"], p.accent.base, ""),
     rule("Markdown quotes", ["markup.quote"], s.comment, italic),
+    rule("Markdown quote marks", ["punctuation.definition.quote.begin.markdown", "beginning.punctuation.definition.quote.markdown"], p.accent.deep, ""),
+    rule("Markdown separators", ["meta.separator.markdown"], s.punctuation, ""),
+
+    // ── YAML ───────────────────────────────────────────────
+    rule("YAML anchors & aliases", ["entity.name.type.anchor.yaml", "variable.other.alias.yaml", "punctuation.definition.anchor.yaml", "punctuation.definition.alias.yaml"], s.type, ""),
+    rule("YAML merge key", ["constant.language.merge.yaml"], s.keyword, ""),
+    rule("YAML tags", ["storage.type.tag-handle.yaml", "entity.name.tag.local.yaml"], s.keyword, ""),
+    rule("YAML document markers", ["entity.other.document.begin.yaml", "entity.other.document.end.yaml"], s.punctuation),
+
+    // ── .env ───────────────────────────────────────────────
+    rule(".env keys", ["variable.key.dotenv"], s.property, ""),
+    rule(".env values", ["property.value.dotenv"], s.string, ""),
+    rule(".env interpolation", ["variable.interpolation.dotenv"], s.property, ""),
+    rule(".env interpolation marks", ["keyword.interpolation.begin.dotenv", "keyword.interpolation.end.dotenv"], s.keyword, ""),
     rule("Diff inserted", ["markup.inserted"], p.git.added),
     rule("Diff deleted", ["markup.deleted"], p.git.deleted),
     rule("Diff changed", ["markup.changed"], p.git.modified),

@@ -1,0 +1,21 @@
+# Aureon build settings
+name: aureon
+version: 2
+enabled: true
+accent: null
+ratio: 0.75
+
+variants:
+  - id: dark
+    label: "Aureon Dark"
+    vivid: false
+  - id: dusk
+    label: 'Aureon Dusk'
+
+defaults: &defaults
+  italics: true
+light:
+  <<: *defaults
+  notes: |
+    Multi-line text
+    keeps its color.

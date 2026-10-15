@@ -2,6 +2,15 @@
 
 All notable changes to **Aureon** are documented here.
 
+## [0.2.0] — 2026-10-15
+
+- **No Italics** versions of Aureon Dark, Dusk and Light: the same colors with upright comments, keywords and parameters
+- Markdown: gold headings with softer `#` marks, gold list bullets, quieter URLs, strikethrough, colored fence languages, and calm emphasis markers
+- YAML: anchors and aliases share a color, and merge keys, tags and document markers are styled
+- `.env` files: keys, values, `${…}` interpolation and `export`
+- New brand: a gold ribbon "A" icon and a new README banner
+- README: a "Which one is for me?" guide
+
 ## [0.1.1] — 2026-10-15
 
 - README: one-click **Install in VS Code** button that opens VS Code from the browser, plus links to the Marketplace and Open VSX pages

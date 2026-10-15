@@ -59,7 +59,7 @@ writeFileSync(
   ),
 );
 
-const shots = variants.map((v) => ({
+const shots = variants.filter((v) => v.options.italics).map((v) => ({
   label: v.label,
   out: join(outDir, `${v.id}.png`),
   tabs: ["Component.tsx", "semantic.ts"],

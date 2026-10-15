@@ -24,6 +24,7 @@ const themes = variants.map((v) => {
     label: v.label,
     themeFile,
     roles: v.palette.syntax,
+    italics: v.options.italics,
     // Vivid variants share their base palette's syntax colors.
     semantic: !v.options.vivid,
     allowedColors: [...hexes(v.palette), ...Object.values<string>(theme.colors)],

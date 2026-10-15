@@ -3,7 +3,7 @@
   "displayName": "Aureon Theme",
   "description": "A refined theme family for focused development: Dark, Dusk and Light, with semantic highlighting and a fully themed UI.",
   "publisher": "nael-awadallah",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "license": "MIT",
   "icon": "images/icon.png",
   "repository": {
@@ -65,6 +65,7 @@
     "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^3.2.0",
     "ovsx": "^1.2.0",
+    "sharp": "^0.35.5",
     "shiki": "^3.23.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"
@@ -82,6 +83,11 @@
         "path": "./themes/aureon-dark-vivid.json"
       },
       {
+        "label": "Aureon Dark No Italics",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aureon-dark-no-italics.json"
+      },
+      {
         "label": "Aureon Dusk",
         "uiTheme": "vs-dark",
         "path": "./themes/aureon-dusk.json"
@@ -92,6 +98,11 @@
         "path": "./themes/aureon-dusk-vivid.json"
       },
       {
+        "label": "Aureon Dusk No Italics",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aureon-dusk-no-italics.json"
+      },
+      {
         "label": "Aureon Light",
         "uiTheme": "vs",
         "path": "./themes/aureon-light.json"
@@ -100,6 +111,11 @@
         "label": "Aureon Light Vivid",
         "uiTheme": "vs",
         "path": "./themes/aureon-light-vivid.json"
+      },
+      {
+        "label": "Aureon Light No Italics",
+        "uiTheme": "vs",
+        "path": "./themes/aureon-light-no-italics.json"
       }
     ]
   }

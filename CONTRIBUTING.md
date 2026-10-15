@@ -30,7 +30,7 @@ npm run scopes -- semantic.ts   # print each token's scopes and color
 ## Images
 
 ```
-npm run icon           # images/icon.svg → images/icon.png
+npm run icon           # images/brand/logo.png → images/icon.png (256×256)
 npm run screenshots    # real VS Code screenshots, 3200×2000, for every variant
 npm run hero           # images/hero.png from the screenshots
 ```

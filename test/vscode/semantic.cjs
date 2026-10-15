@@ -115,10 +115,12 @@ exports.checkSemantic = async function checkSemantic(config) {
       const style = resolveStyle(theme.semanticTokenColors, token.type, token.modifiers, doc.languageId);
       const expected = config.roles[role].toUpperCase();
       const actual = (style.foreground ?? "TextMate fallback").toUpperCase();
-      const ok = actual === expected && (role !== "parameter" || style.italic);
+      const ok = actual === expected && (role !== "parameter" || style.italic === config.italics);
       console.log(`  ${ok ? "ok  " : "FAIL"} ${word.padEnd(14)} ${kind.padEnd(40)} → ${style.selector || "-"} ${actual}`);
       if (actual !== expected) failures.push(`${label}: ${kind} resolved to ${actual} via "${style.selector}", expected ${role} ${expected}`);
-      if (role === "parameter" && !style.italic) failures.push(`${label}: parameter should be italic`);
+      if (role === "parameter" && style.italic !== config.italics) {
+        failures.push(`${label}: parameter should ${config.italics ? "" : "not "}be italic`);
+      }
     }
   }
 

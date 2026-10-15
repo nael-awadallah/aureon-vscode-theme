@@ -144,6 +144,29 @@ export const expectations: Record<string, Expectation[]> = {
     ["Route", 0, null, "decorator"],
   ],
 
+  "README.md": [
+    ["samples", 0, null, "function"], // heading
+    ["link", 0, null, "type"], // link text
+    ["struck", 0, null, "comment"], // strikethrough
+    ["ts", 0, null, "keyword"], // fence language
+  ],
+
+  "config.yaml": [
+    ["name", 0, null, "property"], // key
+    ["2", 0, null, "constant"],
+    ["true", 0, null, "constant"],
+    ["dark", 0, null, "string"], // unquoted value
+    ["defaults", 1, null, "type"], // &anchor
+    ["defaults", 2, null, "type"], // *alias
+  ],
+
+  ".env": [
+    ["APP_NAME", 0, null, "property"], // key
+    ["Aureon", 0, null, "string"], // value
+    ["APP_PORT", 1, null, "property"], // ${APP_PORT}
+    ["export", 0, null, "keyword"],
+  ],
+
   "palette.py": [
     ["HEX", 0, null, "constant"],
     ["Palette", 0, null, "type"], // class declaration

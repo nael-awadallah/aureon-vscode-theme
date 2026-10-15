@@ -1294,11 +1294,20 @@
       "name": "Markdown headings",
       "scope": [
         "markup.heading",
-        "entity.name.section",
-        "punctuation.definition.heading"
+        "entity.name.section.markdown"
       ],
       "settings": {
         "foreground": "#4FD1C5",
+        "fontStyle": "bold"
+      }
+    },
+    {
+      "name": "Markdown heading marks",
+      "scope": [
+        "punctuation.definition.heading.markdown"
+      ],
+      "settings": {
+        "foreground": "#2FA89D",
         "fontStyle": "bold"
       }
     },
@@ -1308,6 +1317,7 @@
         "markup.bold"
       ],
       "settings": {
+        "foreground": "#D2D5DB",
         "fontStyle": "bold"
       }
     },
@@ -1317,27 +1327,105 @@
         "markup.italic"
       ],
       "settings": {
+        "foreground": "#D2D5DB",
         "fontStyle": "italic"
       }
     },
     {
-      "name": "Markdown code",
+      "name": "Markdown bold italic",
       "scope": [
-        "markup.inline.raw",
-        "markup.fenced_code.block"
+        "markup.bold markup.italic",
+        "markup.italic markup.bold"
       ],
       "settings": {
-        "foreground": "#9FD79F"
+        "foreground": "#D2D5DB",
+        "fontStyle": "bold italic"
       }
     },
     {
-      "name": "Markdown links",
+      "name": "Markdown strikethrough",
       "scope": [
-        "markup.underline.link",
-        "string.other.link"
+        "markup.strikethrough"
       ],
       "settings": {
-        "foreground": "#7FB3D5"
+        "foreground": "#6E7686",
+        "fontStyle": "strikethrough"
+      }
+    },
+    {
+      "name": "Markdown emphasis marks",
+      "scope": [
+        "punctuation.definition.bold.markdown",
+        "punctuation.definition.italic.markdown",
+        "punctuation.definition.strikethrough.markdown"
+      ],
+      "settings": {
+        "foreground": "#7A8494",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown inline code",
+      "scope": [
+        "markup.inline.raw"
+      ],
+      "settings": {
+        "foreground": "#9FD79F",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown code fences",
+      "scope": [
+        "markup.fenced_code.block",
+        "markup.raw.block"
+      ],
+      "settings": {
+        "foreground": "#9FD79F",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown fence language",
+      "scope": [
+        "fenced_code.block.language"
+      ],
+      "settings": {
+        "foreground": "#A78BFA",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown link text",
+      "scope": [
+        "string.other.link.title",
+        "string.other.link.description"
+      ],
+      "settings": {
+        "foreground": "#7FB3D5",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown URLs",
+      "scope": [
+        "markup.underline.link",
+        "markup.underline.link.image"
+      ],
+      "settings": {
+        "foreground": "#6E7686",
+        "fontStyle": "underline"
+      }
+    },
+    {
+      "name": "Markdown list bullets",
+      "scope": [
+        "punctuation.definition.list.begin.markdown",
+        "beginning.punctuation.definition.list.markdown"
+      ],
+      "settings": {
+        "foreground": "#4FD1C5",
+        "fontStyle": ""
       }
     },
     {
@@ -1348,6 +1436,112 @@
       "settings": {
         "foreground": "#6E7686",
         "fontStyle": "italic"
+      }
+    },
+    {
+      "name": "Markdown quote marks",
+      "scope": [
+        "punctuation.definition.quote.begin.markdown",
+        "beginning.punctuation.definition.quote.markdown"
+      ],
+      "settings": {
+        "foreground": "#2FA89D",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "Markdown separators",
+      "scope": [
+        "meta.separator.markdown"
+      ],
+      "settings": {
+        "foreground": "#7A8494",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "YAML anchors & aliases",
+      "scope": [
+        "entity.name.type.anchor.yaml",
+        "variable.other.alias.yaml",
+        "punctuation.definition.anchor.yaml",
+        "punctuation.definition.alias.yaml"
+      ],
+      "settings": {
+        "foreground": "#7FB3D5",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "YAML merge key",
+      "scope": [
+        "constant.language.merge.yaml"
+      ],
+      "settings": {
+        "foreground": "#A78BFA",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "YAML tags",
+      "scope": [
+        "storage.type.tag-handle.yaml",
+        "entity.name.tag.local.yaml"
+      ],
+      "settings": {
+        "foreground": "#A78BFA",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": "YAML document markers",
+      "scope": [
+        "entity.other.document.begin.yaml",
+        "entity.other.document.end.yaml"
+      ],
+      "settings": {
+        "foreground": "#7A8494"
+      }
+    },
+    {
+      "name": ".env keys",
+      "scope": [
+        "variable.key.dotenv"
+      ],
+      "settings": {
+        "foreground": "#AEBBD0",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": ".env values",
+      "scope": [
+        "property.value.dotenv"
+      ],
+      "settings": {
+        "foreground": "#9FD79F",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": ".env interpolation",
+      "scope": [
+        "variable.interpolation.dotenv"
+      ],
+      "settings": {
+        "foreground": "#AEBBD0",
+        "fontStyle": ""
+      }
+    },
+    {
+      "name": ".env interpolation marks",
+      "scope": [
+        "keyword.interpolation.begin.dotenv",
+        "keyword.interpolation.end.dotenv"
+      ],
+      "settings": {
+        "foreground": "#A78BFA",
+        "fontStyle": ""
       }
     },
     {

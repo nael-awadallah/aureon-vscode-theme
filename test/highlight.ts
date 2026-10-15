@@ -1,5 +1,5 @@
 import { readFileSync } from "node:fs";
-import { extname, join } from "node:path";
+import { basename, extname, join } from "node:path";
 import { createHighlighter, type BundledLanguage, type ThemedToken } from "shiki";
 
 // TextMate tokenization through Shiki, which uses VS Code's grammars and
@@ -17,11 +17,17 @@ export const langByExt: Record<string, BundledLanguage> = {
   ".html": "html",
   ".php": "php",
   ".py": "python",
+  ".md": "markdown",
+  ".yaml": "yaml",
+  ".yml": "yaml",
 };
+
+export const langOf = (file: string): BundledLanguage =>
+  basename(file).startsWith(".env") ? "dotenv" : langByExt[extname(file)];
 
 export async function tokenize(file: string, themeId = "aureon-dark") {
   const theme = JSON.parse(readFileSync(join(root, "themes", `${themeId}.json`), "utf8"));
-  const lang = langByExt[extname(file)];
+  const lang = langOf(file);
   const highlighter = await createHighlighter({ themes: [theme], langs: [lang] });
   const code = readFileSync(join(root, "samples", file), "utf8").replace(/\r\n/g, "\n");
   const lines: ThemedToken[][] = highlighter.codeToTokensBase(code, {

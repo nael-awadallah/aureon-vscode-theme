@@ -9,11 +9,13 @@ import { locate } from "./locate";
 
 // TextMate fallback colors for every sample in every variant, resolved the way
 // VS Code does (via Shiki + vscode-textmate). Catches broad rules overriding
-// specific ones. Vivid variants share their base palette's syntax, so they're skipped.
+// specific ones. Vivid variants share their base palette's syntax, so they're
+// skipped; No Italics variants are checked for upright text.
 
 const ITALIC = 1;
 
 for (const variant of variants.filter((v) => !v.options.vivid)) {
+  const italics = variant.options.italics;
   const syntax = variant.palette.syntax;
   for (const [file, cases] of Object.entries(expectations)) {
     test(`TextMate: ${variant.label}: ${file}`, async () => {
@@ -47,10 +49,14 @@ for (const variant of variants.filter((v) => !v.options.vivid)) {
             `  "${word}" #${occurrence}: expected ${role} ${expected}, got ${actual}\n      ${scopes}`,
           );
         }
-        if (role === "parameter" && !((token.fontStyle ?? 0) & ITALIC)) {
+        const italic = Boolean((token.fontStyle ?? 0) & ITALIC);
+        if (role === "parameter" && italic !== italics) {
           failures.push(
-            `  "${word}" #${occurrence}: parameter should be italic`,
+            `  "${word}" #${occurrence}: parameter should ${italics ? "" : "not "}be italic`,
           );
+        }
+        if (!italics && italic) {
+          failures.push(`  "${word}" #${occurrence}: No Italics variant renders italic`);
         }
       }
 
