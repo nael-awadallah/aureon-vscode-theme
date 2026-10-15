@@ -35,6 +35,16 @@ npm run screenshots    # real VS Code screenshots, 3200×2000, for every variant
 npm run hero           # images/hero.png from the screenshots
 ```
 
+The brand lives in `images/brand/`: `logo.png` (the original artwork), `logo.svg` (vector version) and `mark.svg` (simplified mark for small sizes, also the site favicon).
+
+## Landing page
+
+```
+npm run site           # builds docs/ from tools/site/ and the theme files
+```
+
+GitHub Pages serves `docs/` from `main`. Edit `tools/site/` (not `docs/`), then rebuild. The live preview's code colors come straight from `themes/*.json`, so rebuild the site after palette changes. Links can preselect the preview: `?theme=dusk&vivid=1&italics=0`.
+
 ## Releasing
 
 See [PUBLISHING.md](PUBLISHING.md).

@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Aureon — a VS Code theme family</title>
+    <meta name="description" content="Aureon Dark, Dusk and Light for VS Code: calm palettes, semantic colors that tell you what each symbol is, and a fully themed interface." />
+    <meta name="theme-color" content="#0D0C0B" />
+    <meta property="og:title" content="Aureon — a VS Code theme family" />
+    <meta property="og:description" content="Dark, Dusk and Light. Semantic colors and a fully themed UI." />
+    <meta property="og:image" content="https://nael-awadallah.github.io/aureon-vscode-theme/assets/social.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,400&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="top">
+      <a class="brand" href="#" aria-label="Aureon home">
+        <img src="assets/mark.svg" alt="" width="32" height="32" />
+        <span>Aureon</span>
+      </a>
+      <nav aria-label="Sections">
+        <a href="#colors">Colors</a>
+        <a href="#screenshots">Screenshots</a>
+        <a href="#install">Install</a>
+        <a href="https://github.com/nael-awadallah/aureon-vscode-theme">GitHub</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title">A theme family for focused development.</h1>
+          <p class="lede">
+            Three calm palettes for VS Code: warm Dark, cool Dusk and daylight Light. Functions, types, parameters and properties each get a color of
+            their own, ordinary variables stay quiet, and the whole interface matches.
+          </p>
+          <div class="actions">
+            <a class="button primary" href="https://vscode.dev/redirect?url=vscode:extension/nael-awadallah.aureon-theme">Install in VS Code</a>
+            <a class="button" href="https://marketplace.visualstudio.com/items?itemName=nael-awadallah.aureon-theme">View on the Marketplace</a>
+          </div>
+          <p class="fineprint">Free and open source, version {{VERSION}}. Also for Cursor, Windsurf and VSCodium via <a href="https://open-vsx.org/extension/nael-awadallah/aureon-theme">Open VSX</a>.</p>
+        </div>
+
+        <div class="controls" role="group" aria-label="Preview settings">
+          <fieldset class="segmented">
+            <legend class="sr-only">Theme</legend>
+            <div id="variant-options"></div>
+          </fieldset>
+          <div class="switches">
+            <label class="switch"><input type="checkbox" id="vivid" /> <span>Vivid status bar</span></label>
+            <label class="switch"><input type="checkbox" id="italics" checked /> <span>Italics</span></label>
+          </div>
+        </div>
+
+        <figure class="editor" id="editor" aria-label="Live preview of the selected Aureon theme">
+          <div class="ed-title">
+            <span class="ed-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="ed-cc">aureon</span>
+          </div>
+          <div class="ed-body">
+            <div class="ed-activity" aria-hidden="true">
+              <svg viewBox="0 0 24 24" class="on"><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Zm0 0v5h5" /></svg>
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6" /><path d="m20 20-4.5-4.5" /></svg>
+              <svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2" /><circle cx="6" cy="18" r="2" /><circle cx="18" cy="8" r="2" /><path d="M6 8v8M18 10c0 5-12 2-12 6" /></svg>
+              <svg viewBox="0 0 24 24"><path d="M7 4v16l13-8L7 4Z" /></svg>
+              <svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" /><rect x="13" y="13" width="7" height="7" /><rect x="4" y="13" width="7" height="7" /><path d="m14 4 6 6" /></svg>
+            </div>
+            <div class="ed-side">
+              <p class="ed-side-title">Explorer</p>
+              <ul id="files" aria-label="Sample files"></ul>
+            </div>
+            <div class="ed-main">
+              <div class="ed-tabs" id="tabs"></div>
+              <div class="ed-crumbs" id="crumbs"></div>
+              <pre class="ed-code" id="code" tabindex="0" aria-label="Highlighted sample code"></pre>
+            </div>
+          </div>
+          <div class="ed-status">
+            <span>main</span>
+            <span>0 errors, 0 warnings</span>
+            <span class="ed-status-right"><span>Ln 1, Col 1</span><span>Spaces: 2</span><span>UTF-8</span><span id="status-lang">TypeScript</span></span>
+          </div>
+        </figure>
+      </section>
+
+      <section class="colors" id="colors" aria-labelledby="colors-title">
+        <div class="section-copy">
+          <h2 id="colors-title">Every color has a job</h2>
+          <p>
+            Aureon uses VS Code's semantic highlighting, so a symbol is colored by what it is, not just where it sits. A function looks the same where
+            it's declared and where it's called. Related roles share a hue, and anything that shows up on most lines stays neutral.
+          </p>
+          <p>TypeScript and JavaScript get this out of the box. Other languages use carefully scoped grammar colors.</p>
+        </div>
+        <ul class="roles" aria-label="Syntax colors in the selected theme"><!--ROLES-->
+        </ul>
+      </section>
+
+      <section class="shots" id="screenshots" aria-labelledby="shots-title">
+        <h2 id="shots-title">Real VS Code, all three</h2>
+        <p class="section-intro">Screenshots from VS Code itself. Pick one to preview it above.</p>
+        <div class="shot-row">
+          <button class="shot" data-variant="aureon-dark" aria-label="Preview Aureon Dark">
+            <img src="assets/aureon-dark.webp" alt="VS Code in Aureon Dark" loading="lazy" width="1600" height="1000" />
+            <span><strong>Dark</strong> Warm umber with gold</span>
+          </button>
+          <button class="shot" data-variant="aureon-dusk" aria-label="Preview Aureon Dusk">
+            <img src="assets/aureon-dusk.webp" alt="VS Code in Aureon Dusk" loading="lazy" width="1600" height="1000" />
+            <span><strong>Dusk</strong> Blue-black with teal and violet</span>
+          </button>
+          <button class="shot" data-variant="aureon-light" aria-label="Preview Aureon Light">
+            <img src="assets/aureon-light.webp" alt="VS Code in Aureon Light" loading="lazy" width="1600" height="1000" />
+            <span><strong>Light</strong> Warm paper with deep amber</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="install" id="install" aria-labelledby="install-title">
+        <div class="section-copy">
+          <h2 id="install-title">Install</h2>
+          <ol class="steps">
+            <li>
+              <strong>VS Code.</strong> Use <a href="https://vscode.dev/redirect?url=vscode:extension/nael-awadallah.aureon-theme">Install in VS Code</a>, or search for
+              Aureon in the Extensions view.
+            </li>
+            <li><strong>Cursor, Windsurf, VSCodium.</strong> Search for Aureon in the extensions view, or get it from <a href="https://open-vsx.org/extension/nael-awadallah/aureon-theme">Open VSX</a>.</li>
+            <li>Press <kbd>Ctrl</kbd>+<kbd>K</kbd> <kbd>Ctrl</kbd>+<kbd>T</kbd> (<kbd>Cmd</kbd> on macOS) and choose an Aureon theme.</li>
+          </ol>
+          <p>
+            Each palette also comes as a <strong>Vivid</strong> version with a solid accent status bar, and a <strong>No Italics</strong> version for fonts
+            without a good italic.
+          </p>
+        </div>
+        <div class="settings">
+          <div class="settings-head">
+            <span>Recommended settings</span>
+            <button class="copy" id="copy" type="button">Copy</button>
+          </div>
+          <pre id="settings-code">{
+  "editor.fontFamily": "'JetBrains Mono', monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.7,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.guides.bracketPairs": "active"
+}</pre>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <img src="assets/mark.svg" alt="" width="24" height="24" />
+      <span>Aureon is MIT licensed. Made by Nael Awadallah.</span>
+      <a href="https://github.com/nael-awadallah/aureon-vscode-theme">Source on GitHub</a>
+      <a href="https://github.com/nael-awadallah/aureon-vscode-theme/issues">Report a color issue</a>
+    </footer>
+
+    <script>
+      /*DATA*/
+    </script>
+    <script src="app.js"></script>
+  </body>
+</html>

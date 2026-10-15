@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1254 1254">
+  <defs>
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1D1915"/>
+      <stop offset="1" stop-color="#0A0908"/>
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F7D89A"/>
+      <stop offset="0.5" stop-color="#E5B567"/>
+      <stop offset="1" stop-color="#B8893F"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0.15" y1="0" x2="0.85" y2="1">
+      <stop offset="0" stop-color="#F8DEA4"/>
+      <stop offset="0.45" stop-color="#E8BC6E"/>
+      <stop offset="1" stop-color="#C08F43"/>
+    </linearGradient>
+    <linearGradient id="back" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#B8893F"/>
+      <stop offset="0.5" stop-color="#D9A859"/>
+      <stop offset="1" stop-color="#E9C078"/>
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7DA9C"/>
+      <stop offset="0.45" stop-color="#E0AE5E"/>
+      <stop offset="1" stop-color="#7E5A24"/>
+    </linearGradient>
+    <linearGradient id="thin" x1="0" y1="1" x2="1" y2="0">
+      <stop offset="0" stop-color="#E9C078"/>
+      <stop offset="1" stop-color="#B8893F"/>
+    </linearGradient>
+    <linearGradient id="fold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6E4E1C"/>
+      <stop offset="1" stop-color="#2A1E0D"/>
+    </linearGradient>
+    <radialGradient id="star" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#FCE7B8"/>
+      <stop offset="1" stop-color="#E2B262"/>
+    </radialGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+  </defs>
+
+  <!-- Tile and glowing frame -->
+  <rect x="110" y="106" width="1034" height="1004" rx="124" fill="url(#tile)"/>
+  <rect x="110" y="106" width="1034" height="1004" rx="124" fill="none" stroke="#F0B85A" stroke-width="26" opacity="0.85" filter="url(#glow)"/>
+  <rect x="110" y="106" width="1034" height="1004" rx="124" fill="none" stroke="url(#frame)" stroke-width="7"/>
+
+  <g id="mark">
+    <!-- Back ribbon: the left leg, in shadow -->
+    <path d="M552 394 C 540 410 528 430 518 452 L 236 954 L 336 954 L 634 500 C 610 452 584 420 552 394 Z" fill="url(#back)"/>
+    <!-- Shadow inside the fold -->
+    <path d="M634 500 L 672 566 C 620 586 580 610 548 640 Z" fill="url(#fold)"/>
+    <!-- Thin inner ribbon -->
+    <path d="M430 770 C 500 690 580 600 672 560 L 682 584 C 600 620 530 690 470 760 Z" fill="url(#thin)"/>
+    <!-- Wave: sweeps from the left foot over to the right leg -->
+    <path d="M236 954 C 300 860 410 712 540 684 C 650 662 738 752 846 906 C 760 856 690 836 610 838 C 510 842 420 900 336 954 Z" fill="url(#wave)"/>
+    <!-- Underside of the wave -->
+    <path d="M336 954 C 420 900 510 842 610 838 C 690 836 760 856 846 906 C 760 872 690 864 612 866 C 520 868 440 914 370 954 Z" fill="#4A3414" opacity="0.8"/>
+    <!-- Front ribbon: folds over the top and runs down to the right foot -->
+    <path d="M552 394 C 572 358 602 342 632 342 C 662 342 686 360 700 390 L 1004 950 C 962 954 906 954 870 942 C 852 934 840 920 832 904 L 634 500 C 610 452 584 420 552 394 Z" fill="url(#front)"/>
+    <!-- Sparkle -->
+    <path d="M893 272 C 900 330 916 346 975 355 C 916 364 900 380 893 440 C 886 380 870 364 811 355 C 870 346 886 330 893 272 Z" fill="url(#star)"/>
+  </g>
+</svg>
