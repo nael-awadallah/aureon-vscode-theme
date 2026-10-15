@@ -38,25 +38,28 @@ export const dark: Palette = {
 
   shadow: "#00000066",
 
+  // Syntax colors follow VS Code's Dark 2026 (measured from the rendered
+  // editor), on Aureon's warm surfaces. Interfaces sit one step lighter than
+  // types so the two stay distinct; operators and punctuation stay quiet.
   syntax: {
-    variable: "#D9D2C7",
-    function: "#E5B567",
-    type: "#8FAFC0",
-    interface: "#A9C4D3",
-    parameter: "#D6C3A5",
-    property: "#CDC6D9",
-    constant: "#D9986A",
-    keyword: "#B6A0D1",
-    string: "#A8BE91",
-    escape: "#86C1B0",
-    decorator: "#D9A08F",
-    tag: "#D98C7E",
-    attribute: "#DDBB80",
+    variable: "#79C0FF",
+    function: "#D2A8FF",
+    type: "#4EC9B0",
+    interface: "#72D6C2",
+    parameter: "#FFA657",
+    property: "#C9D1D9",
+    constant: "#B5CEA8",
+    keyword: "#FF7B72",
+    string: "#A5D6FF",
+    escape: "#7EE787",
+    decorator: "#D2A8FF",
+    tag: "#7EE787",
+    attribute: "#79C0FF",
     operator: "#A39B8F",
     punctuation: "#8A8277",
-    comment: "#7A7268",
-    docTag: "#9A8FB0",
-    invalid: "#E06C6C",
+    comment: "#8B949E",
+    docTag: "#79C0FF",
+    invalid: "#FFA198",
   },
 
   status: {

@@ -58,7 +58,8 @@
     "hero": "tsx tools/hero.ts",
     "publish:vsce": "vsce publish",
     "publish:ovsx": "ovsx publish",
-    "site": "tsx tools/site/build.ts"
+    "site": "tsx tools/site/build.ts",
+    "compare": "tsx tools/screenshots/run.ts --compare"
   },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",

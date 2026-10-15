@@ -1,5 +1,5 @@
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, relative } from "node:path";
 import { runTests } from "@vscode/test-electron";
 import { variants } from "../../src/variants";
 
@@ -21,12 +21,16 @@ const root = join(import.meta.dirname, "..", "..");
 const work = join(root, ".vscode-test", "screenshots");
 const workspace = join(work, "aureon");
 const signals = join(work, "signals");
-const outDir = join(root, "images", "screenshots");
+// `--compare` captures identical editors in VS Code's Dark 2026 and in Aureon,
+// for side-by-side readability reviews. Output stays out of git.
+const compare = process.argv.includes("--compare");
+const outDir = compare ? join(root, ".vscode-test", "compare") : join(root, "images", "screenshots");
 
 rmSync(work, { recursive: true, force: true });
 mkdirSync(signals, { recursive: true });
 mkdirSync(outDir, { recursive: true });
 cpSync(join(root, "samples"), workspace, { recursive: true, filter: (src) => !src.includes(".vscode") });
+if (compare) cpSync(join(import.meta.dirname, "suite.cjs"), join(workspace, "suite.cjs"));
 mkdirSync(join(workspace, ".vscode"));
 writeFileSync(
   join(workspace, ".vscode", "settings.json"),
@@ -80,8 +84,46 @@ interface Shot {
 
 const base = { width: WIDTH, height: HEIGHT, fontSize: 14, sidebar: true, minimap: true, top: 0 };
 
-// README screenshots: one per theme, same file, so they compare at a glance.
-const shots: Shot[] = variants
+// Words measured in --compare mode: [word, occurrence on screen, role].
+const compareWords: Record<string, [string, number, string][]> = {
+  "suite.cjs": [
+    ["config", 0, "variable"], ["shot", 0, "variable"], ["target", 0, "variable"], ["doc", 0, "variable"],
+    ["label", 0, "property"], ["fontSize", 0, "property"], ["workspace", 1, "property"], ["sidebar", 0, "property"],
+    ["command", 0, "parameter"], ["args", 0, "parameter"],
+    ["update", 0, "method"], ["getConfiguration", 0, "method"], ["parse", 0, "method"], ["run", 1, "function"],
+    ["const", 0, "keyword"], ["await", 0, "keyword"], ["for", 0, "keyword"],
+    ["ConfigurationTarget", 0, "property"], ["Workspace", 0, "property"], ["JSON", 0, "variable"], ["false", 0, "constant"],
+  ],
+  "semantic.ts": [
+    ["Level", 0, "enum"], ["Low", 0, "enumMember"], ["Shape", 0, "interface"], ["Circle", 0, "class"], ["ShapeList", 0, "type"],
+    ["area", 0, "method"], ["logged", 0, "function"], ["target", 0, "parameter"], ["id", 0, "property"], ["radius", 0, "property"],
+    ["MAX_RETRIES", 0, "variable"], ["readonly", 0, "keyword"], ["3", 0, "constant"],
+  ],
+  "UserController.php": [
+    ["User", 0, "class"], ["Request", 1, "class"], ["$request", 0, "parameter"], ["$query", 0, "variable"], ["where", 0, "method"],
+  ],
+};
+const compareFiles =["suite.cjs", "semantic.ts", "Component.tsx", "UserController.php", "palette.py", "styles.css"];
+const compareThemes = ["Dark 2026", ...(process.env.AUREON_COMPARE_THEMES ?? "Aureon Dark").split(",")];
+const shots: Shot[] = compare
+  ? compareFiles.flatMap((file) =>
+      compareThemes.map((label) => ({
+        ...base,
+        label,
+        out: join(outDir, `${file.replace(/\W/g, "-")}--${label.replace(/\W/g, "-").toLowerCase()}.png`),
+        tabs: [file],
+        width: 1200,
+        height: 860,
+        fontSize: 15,
+        sidebar: false,
+        minimap: false,
+        top: file === "suite.cjs" ? 26 : 0,
+        cursor: { near: "\n\n" },
+        callouts: (compareWords[file] ?? []).map(([word, nth, role]) => ({ word, nth, label: role, role })),
+      })),
+    )
+  : // README screenshots: one per theme, same file, so they compare at a glance.
+    variants
   .filter((v) => v.options.italics)
   .map((v) => ({
     ...base,
@@ -138,8 +180,17 @@ const findWords = (shot: Shot) => `(() => {
     for (const line of lines) {
       const spans = [...line.querySelectorAll("span > span")];
       for (const span of spans) {
-        if (span.textContent.trim() !== c.word || n++ !== c.nth) continue;
-        const r = span.getBoundingClientRect();
+        // Neighbouring tokens with the same color share a span, so find the
+        // word inside the span and measure just its characters.
+        const text = span.textContent;
+        const re = new RegExp("(?<![\\\\w$])" + c.word.replace(/[$.*+?^{}()|[\\]\\\\]/g, "\\\\$&") + "(?![\\\\w$])");
+        const m = re.exec(text);
+        if (!m || n++ !== c.nth) continue;
+        const node = span.firstChild;
+        const range = document.createRange();
+        range.setStart(node, m.index);
+        range.setEnd(node, m.index + c.word.length);
+        const r = range.getBoundingClientRect();
         const end = Math.max(...spans.filter((s) => s.textContent.trim()).map((s) => s.getBoundingClientRect().right));
         return { ...c, x: r.left, y: r.top, w: r.width, h: r.height, lineEnd: end };
       }
@@ -177,7 +228,7 @@ async function capture() {
     if (shot.callouts) writeCallouts(shot, await send("Runtime.evaluate", { returnByValue: true, expression: findWords(shot) }));
     const { data } = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
     writeFileSync(shot.out, Buffer.from(data, "base64"));
-    console.log(`${shot.label} → images/screenshots/${shot.out.split(/[\\/]/).pop()} (${shot.width * SCALE}×${shot.height * SCALE})`);
+    console.log(`${shot.label} → ${relative(root, shot.out)} (${shot.width * SCALE}×${shot.height * SCALE})`);
     writeFileSync(join(signals, `done-${i}`), "");
   }
   await send("Emulation.clearDeviceMetricsOverride");
