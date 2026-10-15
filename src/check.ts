@@ -1,4 +1,4 @@
-import { contrast, over } from "./color";
+import { contrast, deltaE, over } from "./color";
 import type { Palette } from "./palettes/types";
 import { workbench } from "./ui/workbench";
 import { variants } from "./variants";
@@ -10,6 +10,13 @@ const SUBTLE = 3; // comments, punctuation, line numbers, inactive labels
 const MAX_BODY = 13; // calm, not glaring
 
 const subtleRoles = new Set(["comment", "punctuation"]);
+
+// Role colors must be told apart at a glance (CIE76 ΔE). Roles in the same
+// hue family (classes and interfaces) only need one clear lightness step.
+const DISTINCT = 10;
+const FAMILY = 6;
+const semanticRoles = ["variable", "function", "type", "interface", "parameter", "property", "constant", "keyword", "string"] as const;
+const families = new Set(["type/interface"]);
 
 let failed = 0;
 const need = (label: string, fg: string, bg: string, min: number, max = Infinity) => {
@@ -25,6 +32,17 @@ function checkPalette(p: Palette) {
   need("text.muted", p.text.muted, p.bg.base, SUBTLE);
   for (const [role, fg] of Object.entries(p.syntax)) {
     need(`syntax.${role}`, fg, p.bg.base, subtleRoles.has(role) ? SUBTLE : TEXT);
+  }
+  for (let i = 0; i < semanticRoles.length; i++) {
+    for (let j = i + 1; j < semanticRoles.length; j++) {
+      const pair = `${semanticRoles[i]}/${semanticRoles[j]}`;
+      const d = deltaE(p.syntax[semanticRoles[i]], p.syntax[semanticRoles[j]]);
+      const min = families.has(pair) ? FAMILY : DISTINCT;
+      if (d < min) {
+        console.log(`  FAIL ${("distinct " + pair).padEnd(44)} ΔE ${d.toFixed(1)} < ${min}`);
+        failed++;
+      }
+    }
   }
   for (const [name, fg] of Object.entries(p.ansi)) {
     if (name === "black") continue;

@@ -1,27 +1,27 @@
 import type { Colors, Ctx } from "./context";
 
 // Integrated terminal: ANSI colors, cursor, selection, command decorations, suggest icons.
-export function terminal({ p, gold, alpha }: Ctx): Colors {
+export function terminal({ p, tint, alpha }: Ctx): Colors {
   const { bg, border, text, accent, status, syntax, ansi } = p;
   return {
     "terminal.background": bg.panel,
     "terminal.foreground": text.primary,
-    "terminal.selectionBackground": gold(0.25),
-    "terminal.inactiveSelectionBackground": gold(0.12),
+    "terminal.selectionBackground": tint(0.25),
+    "terminal.inactiveSelectionBackground": tint(0.12),
     "terminal.border": border.subtle,
-    "terminal.dropBackground": gold(0.08),
+    "terminal.dropBackground": tint(0.08),
     "terminal.tab.activeBorder": accent.base,
-    "terminal.findMatchBackground": gold(0.35),
+    "terminal.findMatchBackground": tint(0.35),
     "terminal.findMatchBorder": accent.base,
-    "terminal.findMatchHighlightBackground": gold(0.14),
-    "terminal.hoverHighlightBackground": gold(0.1),
-    "terminalCursor.foreground": accent.base,
+    "terminal.findMatchHighlightBackground": tint(0.14),
+    "terminal.hoverHighlightBackground": tint(0.1),
+    "terminalCursor.foreground": accent.thread,
     "terminalCursor.background": bg.panel,
     "terminalStickyScroll.background": bg.panel,
     "terminalStickyScroll.border": border.subtle,
     "terminalStickyScrollHover.background": bg.lineHighlight,
-    "terminalOverviewRuler.cursorForeground": alpha(accent.base, 0.6),
-    "terminalOverviewRuler.findMatchForeground": gold(0.6),
+    "terminalOverviewRuler.cursorForeground": alpha(accent.thread, 0.6),
+    "terminalOverviewRuler.findMatchForeground": tint(0.6),
     "terminalCommandDecoration.defaultBackground": text.muted,
     "terminalCommandDecoration.successBackground": status.success,
     "terminalCommandDecoration.errorBackground": status.error,

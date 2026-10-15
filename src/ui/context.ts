@@ -7,8 +7,8 @@ export type Colors = Record<string, string>;
 export interface Ctx {
   p: Palette;
   o: VariantOptions;
-  /** Gold at an alpha, 0..1. */
-  gold: (a: number) => string;
+  /** The variant's UI accent at an alpha, 0..1. */
+  tint: (a: number) => string;
   /** Primary text at an alpha: the neutral wash for hovers and fills. */
   wash: (a: number) => string;
   alpha: typeof alpha;
@@ -19,7 +19,7 @@ export interface Ctx {
 export const context = (p: Palette, o: VariantOptions): Ctx => ({
   p,
   o,
-  gold: (a) => alpha(p.accent.base, a),
+  tint: (a) => alpha(p.accent.base, a),
   wash: (a) => alpha(p.text.primary, a),
   alpha,
   mix,

@@ -32,7 +32,11 @@ export const dark: Palette = {
     hover: "#F0C67F",
     deep: "#B8893F",
     on: "#1A140A",
+    thread: "#E5B567",
+    threadOn: "#1A140A",
   },
+
+  shadow: "#00000066",
 
   syntax: {
     variable: "#D9D2C7",
@@ -40,7 +44,7 @@ export const dark: Palette = {
     type: "#8FAFC0",
     interface: "#A9C4D3",
     parameter: "#D6C3A5",
-    property: "#BCC6CC",
+    property: "#CDC6D9",
     constant: "#D9986A",
     keyword: "#B6A0D1",
     string: "#A8BE91",

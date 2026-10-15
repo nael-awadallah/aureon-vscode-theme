@@ -1,7 +1,7 @@
 import type { Colors, Ctx } from "./context";
 
 // Diff editor, merge conflicts, merge editor, git decorations, source control graph.
-export function scm({ p, gold, wash, alpha, mix }: Ctx): Colors {
+export function scm({ p, tint, wash, alpha, mix }: Ctx): Colors {
   const { bg, border, text, accent, status, git, syntax } = p;
   return {
     // Diff
@@ -13,7 +13,7 @@ export function scm({ p, gold, wash, alpha, mix }: Ctx): Colors {
     "diffEditor.border": border.subtle,
     "diffEditor.unchangedRegionBackground": bg.sidebar,
     "diffEditor.unchangedRegionForeground": text.muted,
-    "diffEditor.unchangedRegionShadow": "#00000066",
+    "diffEditor.unchangedRegionShadow": p.shadow,
     "diffEditor.unchangedCodeBackground": wash(0.03),
     "diffEditor.move.border": alpha(text.muted, 0.6),
     "diffEditor.moveActive.border": accent.base,
@@ -42,7 +42,7 @@ export function scm({ p, gold, wash, alpha, mix }: Ctx): Colors {
     "mergeEditor.conflict.handledFocused.border": text.secondary,
     "mergeEditor.conflict.handled.minimapOverViewRuler": text.secondary,
     "mergeEditor.conflict.unhandled.minimapOverViewRuler": status.warning,
-    "mergeEditor.conflictingLines.background": gold(0.14),
+    "mergeEditor.conflictingLines.background": tint(0.14),
     "mergeEditor.conflict.input1.background": alpha(git.added, 0.12),
     "mergeEditor.conflict.input2.background": alpha(status.info, 0.12),
 

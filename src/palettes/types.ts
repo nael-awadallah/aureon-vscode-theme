@@ -32,7 +32,12 @@ export interface Palette {
     hover: string;
     deep: string;
     on: string; // text on an accent fill
+    thread: string; // the gold family thread: cursor, active line number, badges, active tab
+    threadOn: string; // text on a thread fill
   };
+
+  /** Drop shadow for widgets and sticky scroll. */
+  shadow: string;
 
   // Semantic role map: color means "what kind of symbol is this".
   // Ordinary variables stay neutral; related roles share a hue family.

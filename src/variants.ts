@@ -1,8 +1,16 @@
 import { dark } from "./palettes/dark";
-import type { Variant } from "./palettes/types";
+import { dusk } from "./palettes/dusk";
+import { light } from "./palettes/light";
+import type { Palette, Variant } from "./palettes/types";
+
+const family = (id: string, label: string, palette: Palette): Variant[] => [
+  { id, label, palette, options: { vivid: false, italics: true } },
+  { id: `${id}-vivid`, label: `${label} Vivid`, palette, options: { vivid: true, italics: true } },
+];
 
 // Every theme shipped in package.json.
 export const variants: Variant[] = [
-  { id: "aureon-dark", label: "Aureon Dark", palette: dark, options: { vivid: false, italics: true } },
-  { id: "aureon-dark-vivid", label: "Aureon Dark Vivid", palette: dark, options: { vivid: true, italics: true } },
+  ...family("aureon-dark", "Aureon Dark", dark),
+  ...family("aureon-dusk", "Aureon Dusk", dusk),
+  ...family("aureon-light", "Aureon Light", light),
 ];

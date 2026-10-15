@@ -58,6 +58,26 @@
         "label": "Aureon Dark Vivid",
         "uiTheme": "vs-dark",
         "path": "./themes/aureon-dark-vivid.json"
+      },
+      {
+        "label": "Aureon Dusk",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aureon-dusk.json"
+      },
+      {
+        "label": "Aureon Dusk Vivid",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aureon-dusk-vivid.json"
+      },
+      {
+        "label": "Aureon Light",
+        "uiTheme": "vs",
+        "path": "./themes/aureon-light.json"
+      },
+      {
+        "label": "Aureon Light Vivid",
+        "uiTheme": "vs",
+        "path": "./themes/aureon-light-vivid.json"
       }
     ]
   }

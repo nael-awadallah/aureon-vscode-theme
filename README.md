@@ -1,13 +1,14 @@
 # Aureon — VS Code Theme
 
-A refined, modern theme family for focused development. Warm umber surfaces, gold accents, and balanced, readable syntax colors.
+A refined, modern theme family for focused development: calm surfaces, a gold family thread, and syntax colors that tell you what each symbol is.
 
-| Theme                                     | Status      |
-| ----------------------------------------- | ----------- |
-| Aureon Dark                               | in progress |
-| Aureon Dark Vivid (solid gold status bar) | in progress |
-| Aureon Dusk                               | planned     |
-| Aureon Light                              | planned     |
+| Theme | Look |
+| --- | --- |
+| Aureon Dark | Warm umber-black with gold accents. The signature look |
+| Aureon Dusk | Cool blue-black with teal and violet, gold cursor and badges |
+| Aureon Light | Warm paper with deep amber accents, for daylight |
+
+Each theme also comes in a **Vivid** version with a solid accent status bar.
 
 ## Install
 
