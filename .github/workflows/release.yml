@@ -1,0 +1,41 @@
+name: Release
+
+# Push a tag like v0.1.0 to publish to the VS Code Marketplace and Open VSX.
+# Needs repository secrets VSCE_PAT and OVSX_PAT (see PUBLISHING.md).
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run build
+      - name: Generated themes are committed
+        run: git diff --exit-code -- themes package.json
+      - name: Tag matches package.json version
+        run: test "v$(node -p "require('./package.json').version")" = "${GITHUB_REF_NAME}"
+      - run: npm run check
+      - run: npm test
+      - name: Semantic tokens and UI audit in a clean VS Code
+        run: xvfb-run -a npm run test:vscode
+      - run: npx vsce package --out aureon-theme.vsix
+      - name: Publish to the VS Code Marketplace
+        run: npx vsce publish --packagePath aureon-theme.vsix
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
+      - name: Publish to Open VSX
+        run: npx ovsx publish aureon-theme.vsix
+        env:
+          OVSX_PAT: ${{ secrets.OVSX_PAT }}
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: aureon-theme.vsix
+          generate_release_notes: true

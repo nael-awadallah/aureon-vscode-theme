@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#25221D"/>
+      <stop offset="1" stop-color="#110F0D"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="#F6D696"/>
+      <stop offset="0.55" stop-color="#E5B567"/>
+      <stop offset="1" stop-color="#B8893F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.32" r="0.55">
+      <stop offset="0" stop-color="#E5B567" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#E5B567" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#bg)"/>
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#glow)"/>
+  <rect x="17.5" y="17.5" width="477" height="477" rx="106.5" fill="none" stroke="#E5B567" stroke-opacity="0.18" stroke-width="3"/>
+
+  <!-- Aureole: a thin halo above the apex -->
+  <ellipse cx="256" cy="132" rx="92" ry="26" fill="none" stroke="url(#gold)" stroke-width="7" stroke-opacity="0.75"/>
+
+  <!-- The A: two tapered legs and a fine crossbar -->
+  <path d="M256 150 L148 392 L180 392 L256 214 L332 392 L364 392 Z" fill="url(#gold)"/>
+  <rect x="196" y="304" width="120" height="14" rx="7" fill="url(#gold)"/>
+  <path d="M128 392 H200 M312 392 H384" stroke="url(#gold)" stroke-width="12" stroke-linecap="round"/>
+</svg>

@@ -1,10 +1,19 @@
 {
   "name": "aureon-theme",
   "displayName": "Aureon Theme",
-  "description": "A refined, modern theme family with warm gold accents — elegant, readable, and easy on the eyes.",
+  "description": "A refined theme family for focused development: Dark, Dusk and Light, with semantic highlighting and a fully themed UI.",
   "publisher": "nael-awadallah",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
+  "icon": "images/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nael-awadallah/aureon-vscode-theme.git"
+  },
+  "homepage": "https://github.com/nael-awadallah/aureon-vscode-theme#readme",
+  "bugs": {
+    "url": "https://github.com/nael-awadallah/aureon-vscode-theme/issues"
+  },
   "type": "module",
   "engines": {
     "vscode": "^1.86.0"
@@ -14,11 +23,16 @@
   ],
   "keywords": [
     "theme",
+    "color-theme",
     "dark",
+    "light",
     "gold",
     "warm",
     "elegant",
-    "color-theme"
+    "semantic",
+    "semantic-highlighting",
+    "dusk",
+    "teal"
   ],
   "galleryBanner": {
     "color": "#141311",
@@ -26,6 +40,7 @@
   },
   "files": [
     "themes/*.json",
+    "images/icon.png",
     "CHANGELOG.md",
     "LICENSE"
   ],
@@ -34,15 +49,22 @@
     "dev": "tsx watch src/build.ts",
     "check": "tsx src/check.ts",
     "typecheck": "tsc --noEmit",
-    "package": "vsce package --allow-missing-repository",
+    "package": "vsce package",
     "test": "tsx --test test/textmate.test.ts",
     "scopes": "tsx test/scopes.ts",
-    "test:vscode": "tsx test/vscode/run.ts"
+    "test:vscode": "tsx test/vscode/run.ts",
+    "icon": "tsx tools/icon.ts",
+    "screenshots": "tsx tools/screenshots/run.ts",
+    "hero": "tsx tools/hero.ts",
+    "publish:vsce": "vsce publish",
+    "publish:ovsx": "ovsx publish"
   },
   "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "@types/node": "^22.0.0",
     "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^3.2.0",
+    "ovsx": "^1.2.0",
     "shiki": "^3.23.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"

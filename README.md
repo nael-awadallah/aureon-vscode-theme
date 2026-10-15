@@ -1,45 +1,97 @@
-# Aureon — VS Code Theme
+<p align="center">
+  <img src="https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/hero.png" alt="Aureon — VS Code theme family: Dark, Dusk and Light" width="100%">
+</p>
 
-A refined, modern theme family for focused development: calm surfaces, a gold family thread, and syntax colors that tell you what each symbol is.
+# Aureon
 
-| Theme | Look |
-| --- | --- |
-| Aureon Dark | Warm umber-black with gold accents. The signature look |
-| Aureon Dusk | Cool blue-black with teal and violet, gold cursor and badges |
-| Aureon Light | Warm paper with deep amber accents, for daylight |
+A refined, modern theme family for focused development. Calm surfaces, a gold thread that runs through every variant, and syntax colors that tell you **what each symbol is** — not just that it's code.
 
-Each theme also comes in a **Vivid** version with a solid accent status bar.
+- **Three moods, one design:** Aureon Dark, Aureon Dusk and Aureon Light, each with a **Vivid** version that has a solid accent status bar.
+- **Semantic highlighting built in:** functions, methods, classes, interfaces, parameters and properties each have their own color, and ordinary variables stay calm. It works out of the box for TypeScript and JavaScript, with no extra extensions.
+- **The whole UI, not just the editor:** more than 820 workbench colors, so chat, debugging, testing, notebooks, the merge editor and the source control graph all match. No stock VS Code blue left anywhere.
+- **Easy on the eyes:** every text color is checked against WCAG contrast, with a ceiling too, so nothing glares.
+
+## The themes
+
+### Aureon Dark
+
+The signature look: deep umber-black with warm gold accents.
+
+![Aureon Dark](https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/screenshots/aureon-dark.png)
+
+### Aureon Dusk
+
+A cool alternative: blue-black with teal and violet. Gold stays on the cursor, the active line number and badges.
+
+![Aureon Dusk](https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/screenshots/aureon-dusk.png)
+
+### Aureon Light
+
+Warm paper with deep amber accents, for daylight. Every accent is dark enough to read as text.
+
+![Aureon Light](https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/screenshots/aureon-light.png)
+
+### Vivid versions
+
+**Aureon Dark Vivid**, **Aureon Dusk Vivid** and **Aureon Light Vivid** swap the quiet status bar for a solid accent bar.
+
+![Aureon Dark Vivid](https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/screenshots/aureon-dark-vivid.png)
+
+## Semantic colors
+
+Color means something. Related roles share a hue family, and anything that appears on most lines stays neutral.
+
+| Role | Dark | Dusk | Light | Style |
+| --- | --- | --- | --- | --- |
+| Functions & methods | `#E5B567` | `#4FD1C5` | `#9A5B13` | |
+| Classes, types, enums, namespaces | `#8FAFC0` | `#7FB3D5` | `#1D4ED8` | |
+| Interfaces & type parameters | `#A9C4D3` | `#9CC8E6` | `#2F6FB0` | |
+| Parameters | `#D6C3A5` | `#E0C7A3` | `#8A4B2A` | italic |
+| Properties | `#CDC6D9` | `#AEBBD0` | `#3F5A6E` | |
+| Enum members & literals | `#D9986A` | `#E9A27C` | `#B4421A` | |
+| Keywords | `#B6A0D1` | `#A78BFA` | `#6D28D9` | italic |
+| Strings | `#A8BE91` | `#9FD79F` | `#2F7D32` | |
+| Variables | `#D9D2C7` | `#D2D5DB` | `#34322F` | |
+| Comments | `#7A7268` | `#6E7686` | `#7D766C` | italic |
+
+A declaration and its uses always share a color. Symbol icons in suggestions and the outline follow the same roles.
+
+**Language support.** TypeScript, JavaScript, TSX and JSX get full semantic colors from VS Code's built-in TypeScript support. CSS, HTML, JSON, PHP, Python and others use carefully scoped grammar colors. If you use [Intelephense](https://marketplace.visualstudio.com/items?itemName=bmewburn.vscode-intelephense-client) (PHP) or [Pylance](https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance) (Python), their semantic tokens pick up the same colors automatically.
 
 ## Install
 
-Search for **Aureon** in the Extensions panel, or:
+**VS Code:** open the Extensions view (`Ctrl+Shift+X`), search for **Aureon**, and install. Or run:
 
 ```
 ext install nael-awadallah.aureon-theme
 ```
 
-Then `Ctrl+K Ctrl+T` (`Cmd+K Cmd+T` on macOS) and pick **Aureon Dark**.
+**Cursor, Windsurf, VSCodium and other editors that use Open VSX:** search for **Aureon** in the extensions view, or get it from [open-vsx.org](https://open-vsx.org/extension/nael-awadallah/aureon-theme).
 
-## Development
+Then press `Ctrl+K Ctrl+T` (`Cmd+K Cmd+T` on macOS) and choose an Aureon theme.
 
-The theme JSON files in `themes/` are generated, so don't edit them by hand.
+## Recommended settings
 
-- `src/palettes/` — the colors, as semantic roles
-- `src/ui/` — workbench colors, mapped from roles
-- `src/syntax/` — TextMate and semantic token colors
-- `src/variants.ts` — the list of shipped themes
+Aureon looks its best with a modern coding font and a little breathing room:
 
+```jsonc
+{
+  "editor.fontFamily": "'JetBrains Mono', 'Cascadia Code', Consolas, monospace",
+  "editor.fontLigatures": true,
+  "editor.fontSize": 14,
+  "editor.lineHeight": 1.7,
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.guides.bracketPairs": "active",
+  "workbench.tree.indent": 14
+}
 ```
-npm install
-npm run dev      # rebuild themes/ on every save
-npm run check    # WCAG contrast check
-npm test         # TextMate colors for every file in samples/
-npm run test:vscode     # semantic tokens + stock-color audit in a clean VS Code
-npm run scopes -- semantic.ts   # print each token's scopes and color
-```
 
-Press `F5` in VS Code to open an Extension Development Host on `samples/` with Aureon Dark applied. While `npm run dev` runs, saved palette edits reload live.
+Comments, keywords and parameters are italic. Fonts with a well-drawn italic, such as JetBrains Mono, Cascadia Code or Monaspace, make that shine.
+
+## Feedback
+
+Found a color that's hard to read or a spot that still looks stock? [Open an issue](https://github.com/nael-awadallah/aureon-vscode-theme/issues) with a screenshot and the output of **Developer: Inspect Editor Tokens and Scopes**.
 
 ## License
 
-MIT. See the `LICENSE` file.
+[MIT](https://github.com/nael-awadallah/aureon-vscode-theme/blob/main/LICENSE)

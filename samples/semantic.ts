@@ -14,7 +14,7 @@ interface Shape {
 
 type ShapeList<T extends Shape> = Array<T>;
 
-function logged(target: unknown, context: ClassMethodDecoratorContext) {
+function logged<Method>(target: Method, context: ClassMethodDecoratorContext): Method {
   return target;
 }
 
