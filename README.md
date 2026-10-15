@@ -2,6 +2,12 @@
   <img src="https://raw.githubusercontent.com/nael-awadallah/aureon-vscode-theme/main/images/hero.png" alt="Aureon — VS Code theme family: Dark, Dusk and Light" width="100%">
 </p>
 
+<p align="center">
+  <a href="https://vscode.dev/redirect?url=vscode:extension/nael-awadallah.aureon-theme"><img src="https://img.shields.io/badge/Install%20in-VS%20Code-E5B567?style=for-the-badge&labelColor=141311" alt="Install in VS Code"></a>
+  <a href="https://marketplace.visualstudio.com/items?itemName=nael-awadallah.aureon-theme"><img src="https://img.shields.io/badge/View%20on-Marketplace-8FAFC0?style=for-the-badge&labelColor=141311" alt="View on the VS Code Marketplace"></a>
+  <a href="https://open-vsx.org/extension/nael-awadallah/aureon-theme"><img src="https://img.shields.io/badge/Get%20it%20on-Open%20VSX-4FD1C5?style=for-the-badge&labelColor=141311" alt="Get it on Open VSX"></a>
+</p>
+
 # Aureon
 
 A refined, modern theme family for focused development. Calm surfaces, a gold thread that runs through every variant, and syntax colors that tell you **what each symbol is** — not just that it's code.
@@ -60,7 +66,9 @@ A declaration and its uses always share a color. Symbol icons in suggestions and
 
 ## Install
 
-**VS Code:** open the Extensions view (`Ctrl+Shift+X`), search for **Aureon**, and install. Or run:
+**VS Code, from the browser:** click **[Install in VS Code](https://vscode.dev/redirect?url=vscode:extension/nael-awadallah.aureon-theme)**. Your browser asks to open VS Code, which then shows Aureon with an **Install** button. You can also use the **Install** button on the [Marketplace page](https://marketplace.visualstudio.com/items?itemName=nael-awadallah.aureon-theme).
+
+**VS Code, from the editor:** open the Extensions view (`Ctrl+Shift+X`), search for **Aureon**, and install. Or open Quick Open (`Ctrl+P`) and run:
 
 ```
 ext install nael-awadallah.aureon-theme

@@ -2,6 +2,10 @@
 
 All notable changes to **Aureon** are documented here.
 
+## [0.1.1] — 2026-10-15
+
+- README: one-click **Install in VS Code** button that opens VS Code from the browser, plus links to the Marketplace and Open VSX pages
+
 ## [0.1.0] — 2026-10-15
 
 First public release.
