@@ -29,13 +29,18 @@ exports.run = async function run() {
   const { workspace, signals, shots } = JSON.parse(process.env.AUREON_SCREENSHOTS);
   const run = (command, ...args) => vscode.commands.executeCommand(command, ...args).then(undefined, () => undefined);
 
+  const config = vscode.workspace.getConfiguration();
+  const target = vscode.ConfigurationTarget.Workspace;
+
   for (const [i, shot] of shots.entries()) {
-    await vscode.workspace.getConfiguration().update("workbench.colorTheme", shot.label, vscode.ConfigurationTarget.Workspace);
+    await config.update("workbench.colorTheme", shot.label, target);
+    await config.update("editor.fontSize", shot.fontSize, target);
+    await config.update("editor.minimap.enabled", shot.minimap, target);
 
     await run("workbench.action.closeAllEditors");
     await run("workbench.action.closeAuxiliaryBar");
     await run("workbench.action.closePanel");
-    await run("workbench.view.explorer");
+    await run(shot.sidebar ? "workbench.view.explorer" : "workbench.action.closeSidebar");
 
     for (const file of shot.tabs) {
       const doc = await vscode.workspace.openTextDocument(path.join(workspace, file));
@@ -44,13 +49,18 @@ exports.run = async function run() {
     const editor = vscode.window.activeTextEditor;
     await semanticTokensReady(editor.document.uri);
 
-    // Select one word so selection, occurrence highlights and the gold cursor show.
+    // A selected word shows selection and occurrence highlights; a bare cursor
+    // shows the line highlight. Both show the gold cursor.
     const text = editor.document.getText();
-    const start = editor.document.positionAt(text.indexOf(shot.select.near) + shot.select.offset);
-    const end = start.translate(0, shot.select.length);
-    editor.selection = new vscode.Selection(start, end);
-    editor.revealRange(new vscode.Range(0, 0, 0, 0), vscode.TextEditorRevealType.AtTop);
-    await run("revealInExplorer", editor.document.uri);
+    if (shot.select) {
+      const start = editor.document.positionAt(text.indexOf(shot.select.near) + shot.select.offset);
+      editor.selection = new vscode.Selection(start, start.translate(0, shot.select.length));
+    } else if (shot.cursor) {
+      const pos = editor.document.positionAt(text.indexOf(shot.cursor.near));
+      editor.selection = new vscode.Selection(pos, pos);
+    }
+    editor.revealRange(new vscode.Range(shot.top, 0, shot.top, 0), vscode.TextEditorRevealType.AtTop);
+    if (shot.sidebar) await run("revealInExplorer", editor.document.uri);
     await run("workbench.action.focusActiveEditorGroup");
     await run("notifications.clearAll");
     await sleep(1500);

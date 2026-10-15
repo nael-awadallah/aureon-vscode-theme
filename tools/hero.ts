@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { Resvg } from "@resvg/resvg-js";
+import { dark } from "../src/palettes/dark";
 
 // Composes images/hero.png for the README from the brand logo and the real
 // screenshots (run `npm run screenshots` first).
@@ -48,7 +49,7 @@ const feature = (x: number, icon: keyof typeof icons, title: string[], copy: str
 // Variant cards along the bottom.
 const card = (
   x: number,
-  v: { file: string; name: string; copy: string; bg: string; border: string; title: string; text: string; mark: string; swatches: string[] },
+  v: { file: string; lang: string; name: string; copy: string; bg: string; border: string; title: string; text: string; mark: string; swatches: string[] },
 ) => {
   const w = 768;
   const y = 992;
@@ -62,7 +63,32 @@ const card = (
     <text x="108" y="${y + h - 70}" font-family="${SANS}" font-size="36" font-weight="600" fill="${v.title}">${v.name}</text>
     <text x="108" y="${y + h - 32}" font-family="${SANS}" font-size="22" fill="${v.text}">${v.copy}</text>
     <g transform="translate(0 ${y})">${swatches}</g>
+    <rect x="${w - 32 - (28 + v.lang.length * 13)}" y="${y + 32}" width="${28 + v.lang.length * 13}" height="34" rx="17" fill="${v.bg}" fill-opacity="0.9" stroke="${v.border}" stroke-opacity="0.8" stroke-width="1.5"/>
+    <text x="${w - 32 - (28 + v.lang.length * 13) / 2}" y="${y + 55}" text-anchor="middle" font-family="${SANS}" font-size="19" font-weight="600" fill="${v.title}">${v.lang}</text>
   </g>`;
+};
+
+// Callouts on the main screenshot: the word gets an underline in its role
+// color, and a dashed leader runs from the end of its line to a labelled pill.
+interface Callout { word: string; label: string; role: keyof typeof dark.syntax; x: number; y: number; w: number; h: number; lineEnd: number }
+const callouts = (x: number, y: number, w: number) => {
+  const meta: { width: number; callouts: Callout[] } = JSON.parse(readFileSync(join(root, "images", "screenshots", "hero-main.json"), "utf8"));
+  const s = w / meta.width;
+  const column = x + 1330 * s;
+  return meta.callouts
+    .map((c) => {
+      const color = dark.syntax[c.role];
+      const cy = y + (c.y + c.h / 2) * s;
+      const underline = y + (c.y + c.h) * s - 1;
+      const pillW = 46 + c.label.length * 13.4;
+      return `
+    <rect x="${x + c.x * s}" y="${underline}" width="${c.w * s}" height="3" rx="1.5" fill="${color}"/>
+    <line x1="${x + c.lineEnd * s + 14}" y1="${cy}" x2="${column - 8}" y2="${cy}" stroke="${color}" stroke-opacity="0.65" stroke-width="2" stroke-dasharray="2 6" stroke-linecap="round"/>
+    <rect x="${column}" y="${cy - 19}" width="${pillW}" height="38" rx="19" fill="#141311" fill-opacity="0.92" stroke="${color}" stroke-opacity="0.8" stroke-width="2"/>
+    <circle cx="${column + 19}" cy="${cy}" r="6" fill="${color}"/>
+    <text x="${column + 32}" y="${cy + 7.5}" font-family="${SANS}" font-size="21" font-weight="600" fill="${color}">${c.label}</text>`;
+    })
+    .join("");
 };
 
 const crescent = (fill: string, cut: string) => `<circle r="30" fill="${fill}"/><circle cx="12" cy="-8" r="26" fill="${cut}"/>`;
@@ -129,12 +155,14 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" wid
   ${feature(846, "eye", ["Built for Focus"], ["WCAG-checked,", "easy on the eyes"])}
 
   <!-- Main screenshot -->
-  ${screenshot("aureon-dark-vivid.png", 1104, 70, 1250, GOLD, true)}
+  ${screenshot("hero-main.png", 1104, 70, 1250, GOLD, true)}
+  ${callouts(1104, 70, 1250)}
 
   <rect x="0" y="970" width="${W}" height="2" fill="url(#divider)"/>
 
   ${card(20, {
-    file: "aureon-dark-vivid.png",
+    file: "card-dark.png",
+    lang: "TSX",
     name: "Aureon Dark",
     copy: "The signature look. Deep dark with warm gold accents.",
     bg: "#141311",
@@ -145,7 +173,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" wid
     swatches: [GOLD, "#2B2824", "#D9D2C7"],
   })}
   ${card(816, {
-    file: "aureon-dusk-vivid.png",
+    file: "card-dusk.png",
+    lang: "PHP",
     name: "Aureon Dusk",
     copy: "A cool alternative. Deep dark with teal and violet.",
     bg: "#0F1117",
@@ -156,7 +185,8 @@ const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" wid
     swatches: ["#4FD1C5", "#252C36", "#A78BFA"],
   })}
   ${card(1612, {
-    file: "aureon-light-vivid.png",
+    file: "card-light.png",
+    lang: "Markdown",
     name: "Aureon Light",
     copy: "Warm paper with deep amber, made for daylight.",
     bg: "#FAF9F7",

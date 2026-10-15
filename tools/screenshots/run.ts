@@ -59,12 +59,68 @@ writeFileSync(
   ),
 );
 
-const shots = variants.filter((v) => v.options.italics).map((v) => ({
-  label: v.label,
-  out: join(outDir, `${v.id}.png`),
+interface Shot {
+  label: string; // theme
+  out: string;
+  tabs: string[]; // opened in order; the last one is shown
+  width: number; // CSS pixels; the PNG is SCALE× larger
+  height: number;
+  fontSize: number;
+  sidebar: boolean;
+  minimap: boolean;
+  /** 0-based line shown at the top of the editor. */
+  top: number;
+  /** Selects a word: the `length` characters `offset` after the first `near`. */
+  select?: { near: string; offset: number; length: number };
+  /** Cursor (no selection) at the start of the first line containing `near`. */
+  cursor?: { near: string };
+  /** Words whose on-screen boxes are saved next to the PNG, for hero callouts. */
+  callouts?: { word: string; nth: number; label: string; role: string }[];
+}
+
+const base = { width: WIDTH, height: HEIGHT, fontSize: 14, sidebar: true, minimap: true, top: 0 };
+
+// README screenshots: one per theme, same file, so they compare at a glance.
+const shots: Shot[] = variants
+  .filter((v) => v.options.italics)
+  .map((v) => ({
+    ...base,
+    label: v.label,
+    out: join(outDir, `${v.id}.png`),
+    tabs: ["Component.tsx", "semantic.ts"],
+    select: { near: "this.radius = radius", offset: 5, length: 6 }, // "radius"
+  }));
+
+// Hero: large, readable code with callouts on each semantic role.
+shots.push({
+  ...base,
+  label: "Aureon Dark Vivid",
+  out: join(outDir, "hero-main.png"),
   tabs: ["Component.tsx", "semantic.ts"],
-  select: { near: "this.radius = radius", offset: 5, length: 6 }, // "radius"
-}));
+  width: 1240,
+  height: 775,
+  fontSize: 17,
+  sidebar: false,
+  minimap: false,
+  top: 4,
+  cursor: { near: "    this.id = id;" },
+  callouts: [
+    { word: "Low", nth: 0, label: "Enum member", role: "constant" },
+    { word: "Shape", nth: 0, label: "Interface", role: "interface" },
+    { word: "area", nth: 0, label: "Method", role: "function" },
+    { word: "Circle", nth: 0, label: "Class", role: "type" },
+    { word: "radius", nth: 0, label: "Property", role: "property" },
+    { word: "radius", nth: 1, label: "Parameter", role: "parameter" },
+  ],
+});
+
+// Hero cards: a different language per theme, to show the range.
+const card = { ...base, width: 1280, height: 800, fontSize: 15, minimap: false };
+shots.push(
+  { ...card, label: "Aureon Dark Vivid", out: join(outDir, "card-dark.png"), tabs: ["semantic.ts", "Component.tsx"], cursor: { near: "  return (" } },
+  { ...card, label: "Aureon Dusk Vivid", out: join(outDir, "card-dusk.png"), tabs: ["semantic.ts", "UserController.php"], top: 9, cursor: { near: "    public function index" } },
+  { ...card, label: "Aureon Light Vivid", out: join(outDir, "card-light.png"), tabs: ["semantic.ts", "README.md"], cursor: { near: "## Text" } },
+);
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
@@ -104,12 +160,39 @@ async function connect() {
   throw new Error("could not reach the VS Code workbench over DevTools");
 }
 
+/** Page script: on-screen boxes of the callout words, plus where each word's line ends. */
+const findWords = (shot: Shot) => `(() => {
+  const lines = [...document.querySelectorAll(".editor-instance .view-lines .view-line")]
+    .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+  return ${JSON.stringify(shot.callouts)}.map((c) => {
+    let n = 0;
+    for (const line of lines) {
+      const spans = [...line.querySelectorAll("span > span")];
+      for (const span of spans) {
+        if (span.textContent.trim() !== c.word || n++ !== c.nth) continue;
+        const r = span.getBoundingClientRect();
+        const end = Math.max(...spans.filter((s) => s.textContent.trim()).map((s) => s.getBoundingClientRect().right));
+        return { ...c, x: r.left, y: r.top, w: r.width, h: r.height, lineEnd: end };
+      }
+    }
+    return { ...c, missing: true };
+  });
+})()`;
+
+/** Saves the callout boxes, in PNG pixels, next to the screenshot. */
+function writeCallouts(shot: Shot, { result }: { result: { value: any[] } }) {
+  const missing = result.value.filter((b) => b.missing).map((b) => b.word);
+  if (missing.length) throw new Error(`callout words not on screen: ${missing.join(", ")}`);
+  const callouts = result.value.map((b) => ({ ...b, x: b.x * SCALE, y: b.y * SCALE, w: b.w * SCALE, h: b.h * SCALE, lineEnd: b.lineEnd * SCALE }));
+  writeFileSync(shot.out.replace(/\.png$/, ".json"), JSON.stringify({ width: shot.width * SCALE, height: shot.height * SCALE, callouts }, null, 2) + "\n");
+}
+
 async function capture() {
   const send = await connect();
   for (const [i, shot] of shots.entries()) {
     const ready = join(signals, `ready-${i}`);
     while (!existsSync(ready)) await sleep(200);
-    await send("Emulation.setDeviceMetricsOverride", { width: WIDTH, height: HEIGHT, deviceScaleFactor: SCALE, mobile: false });
+    await send("Emulation.setDeviceMetricsOverride", { width: shot.width, height: shot.height, deviceScaleFactor: SCALE, mobile: false });
     await sleep(1500); // let the workbench re-layout at the new size
     // The test window titles itself "[Extension Development Host] …"; users never see that.
     await send("Runtime.evaluate", {
@@ -122,9 +205,10 @@ async function capture() {
       })()`,
     });
     await sleep(200);
+    if (shot.callouts) writeCallouts(shot, await send("Runtime.evaluate", { returnByValue: true, expression: findWords(shot) }));
     const { data } = await send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
     writeFileSync(shot.out, Buffer.from(data, "base64"));
-    console.log(`${shot.label} → images/screenshots/${shot.out.split(/[\\/]/).pop()} (${WIDTH * SCALE}×${HEIGHT * SCALE})`);
+    console.log(`${shot.label} → images/screenshots/${shot.out.split(/[\\/]/).pop()} (${shot.width * SCALE}×${shot.height * SCALE})`);
     writeFileSync(join(signals, `done-${i}`), "");
   }
   await send("Emulation.clearDeviceMetricsOverride");
