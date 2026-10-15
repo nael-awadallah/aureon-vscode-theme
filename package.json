@@ -36,8 +36,8 @@
     "typecheck": "tsc --noEmit",
     "package": "vsce package --allow-missing-repository",
     "test": "tsx --test test/textmate.test.ts",
-    "test:semantic": "tsx test/semantic/run.ts",
-    "scopes": "tsx test/scopes.ts"
+    "scopes": "tsx test/scopes.ts",
+    "test:vscode": "tsx test/vscode/run.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

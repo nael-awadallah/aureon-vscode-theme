@@ -33,7 +33,7 @@ npm install
 npm run dev      # rebuild themes/ on every save
 npm run check    # WCAG contrast check
 npm test         # TextMate colors for every file in samples/
-npm run test:semantic   # semantic tokens in a clean VS Code, no extensions
+npm run test:vscode     # semantic tokens + stock-color audit in a clean VS Code
 npm run scopes -- semantic.ts   # print each token's scopes and color
 ```
 

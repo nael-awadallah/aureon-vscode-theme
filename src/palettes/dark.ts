@@ -67,7 +67,7 @@ export const dark: Palette = {
     modified: "#D6A962",
     deleted: "#D9796E",
     untracked: "#A8BE91",
-    ignored: "#5C564E",
+    ignored: "#655E55",
     conflict: "#D98C7E",
     renamed: "#86C1B0",
   },

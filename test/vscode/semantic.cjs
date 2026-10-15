@@ -1,5 +1,4 @@
-// Runs inside the VS Code extension host (see run.ts). Plain CommonJS on purpose:
-// the extension host loads this file directly.
+// Semantic token checks. Runs inside the VS Code extension host (see index.cjs).
 const fs = require("node:fs");
 const path = require("node:path");
 const vscode = require("vscode");
@@ -76,8 +75,7 @@ function decode(data, legend) {
   return out;
 }
 
-exports.run = async function run() {
-  const config = JSON.parse(process.env.AUREON_SEMANTIC_TEST);
+exports.checkSemantic = async function checkSemantic(config) {
   const theme = JSON.parse(fs.readFileSync(config.themeFile, "utf8"));
   const failures = [];
   let checked = 0;
@@ -86,11 +84,6 @@ exports.run = async function run() {
 
   const others = vscode.extensions.all.filter((e) => !e.packageJSON.isBuiltin && e.id !== "nael-awadallah.aureon-theme");
   if (others.length) failures.push(`unexpected extensions active: ${others.map((e) => e.id).join(", ")}`);
-
-  await vscode.workspace.getConfiguration().update("workbench.colorTheme", config.themeLabel, vscode.ConfigurationTarget.Global);
-  if (vscode.workspace.getConfiguration().get("workbench.colorTheme") !== config.themeLabel) {
-    failures.push(`could not activate ${config.themeLabel}`);
-  }
 
   for (const [file, cases] of Object.entries(config.expectations)) {
     const semanticCases = cases.filter((c) => c[2]);
@@ -130,5 +123,5 @@ exports.run = async function run() {
   }
 
   console.log(`\nChecked ${checked} semantic tokens.`);
-  if (failures.length) throw new Error(`${failures.length} semantic check(s) failed:\n  ${failures.join("\n  ")}`);
+  return failures;
 };

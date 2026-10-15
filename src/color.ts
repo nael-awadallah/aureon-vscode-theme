@@ -14,7 +14,10 @@ export const mix = (a: string, b: string, t: number) => {
   return "#" + [r1 + (r2 - r1) * t, g1 + (g2 - g1) * t, b1 + (b2 - b1) * t].map(toHex).join("");
 };
 
-const luminance = (hex: string) => {
+/** Composite a #RRGGBBAA color over an opaque background. */
+export const over = (top: string, bottom: string) => (top.length === 9 ? mix(bottom, top, parseInt(top.slice(7, 9), 16) / 255) : top);
+
+const luminance =(hex: string) => {
   const [r, g, b] = rgb(hex).map((v) => {
     const c = v / 255;
     return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4;

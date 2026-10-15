@@ -21,6 +21,6 @@ jobs:
         run: git diff --exit-code -- themes package.json
       - run: npm run check
       - run: npm test
-      - name: Semantic tokens in a clean VS Code
-        run: xvfb-run -a npm run test:semantic
+      - name: Semantic tokens and UI audit in a clean VS Code
+        run: xvfb-run -a npm run test:vscode
       - run: npm run package
