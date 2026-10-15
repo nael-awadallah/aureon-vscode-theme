@@ -6,6 +6,7 @@
   <a href="https://vscode.dev/redirect?url=vscode:extension/nael-awadallah.aureon-theme"><img src="https://img.shields.io/badge/Install%20in-VS%20Code-E5B567?style=for-the-badge&labelColor=141311" alt="Install in VS Code"></a>
   <a href="https://marketplace.visualstudio.com/items?itemName=nael-awadallah.aureon-theme"><img src="https://img.shields.io/badge/View%20on-Marketplace-8FAFC0?style=for-the-badge&labelColor=141311" alt="View on the VS Code Marketplace"></a>
   <a href="https://open-vsx.org/extension/nael-awadallah/aureon-theme"><img src="https://img.shields.io/badge/Get%20it%20on-Open%20VSX-4FD1C5?style=for-the-badge&labelColor=141311" alt="Get it on Open VSX"></a>
+  <a href="https://nael-awadallah.github.io/aureon-vscode-theme/"><img src="https://img.shields.io/badge/Try%20it-Live%20preview-D9986A?style=for-the-badge&labelColor=141311" alt="Try the live preview on the Aureon website"></a>
 </p>
 
 # Aureon
@@ -16,6 +17,8 @@ A refined, modern theme family for focused development. Calm surfaces, a gold th
 - **Semantic highlighting built in:** functions, methods, classes, interfaces, parameters and properties each have their own color, and ordinary variables stay calm. It works out of the box for TypeScript and JavaScript, with no extra extensions.
 - **The whole UI, not just the editor:** more than 820 workbench colors, so chat, debugging, testing, notebooks, the merge editor and the source control graph all match. No stock VS Code blue left anywhere.
 - **Easy on the eyes:** every text color is checked against WCAG contrast, with a ceiling too, so nothing glares.
+
+**[Try every theme live on the website](https://nael-awadallah.github.io/aureon-vscode-theme/)** Switch between Dark, Dusk and Light and browse real code before you install.
 
 ## The themes
 
