@@ -34,22 +34,24 @@ export interface Palette {
     on: string; // text on an accent fill
   };
 
+  // Semantic role map: color means "what kind of symbol is this".
+  // Ordinary variables stay neutral; related roles share a hue family.
   syntax: {
-    keyword: string;
-    function: string;
-    type: string;
-    string: string;
-    escape: string; // string escapes, regexp
-    number: string; // numbers, constants, booleans, enum members
-    variable: string;
+    variable: string; // locals — neutral foreground
+    function: string; // functions and methods, declarations and calls
+    type: string; // classes, types, enums, namespaces
+    interface: string; // interfaces, type parameters
     parameter: string;
     property: string;
-    self: string; // this / self
-    operator: string;
-    punctuation: string;
+    constant: string; // numbers, booleans, enum members, module constants
+    keyword: string; // also this / self
+    string: string;
+    escape: string; // string escapes, regexp
+    decorator: string;
     tag: string;
     attribute: string;
-    decorator: string;
+    operator: string;
+    punctuation: string;
     comment: string;
     docTag: string;
     invalid: string;

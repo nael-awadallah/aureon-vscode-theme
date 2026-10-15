@@ -20,4 +20,7 @@ jobs:
       - name: Generated themes are committed
         run: git diff --exit-code -- themes package.json
       - run: npm run check
+      - run: npm test
+      - name: Semantic tokens in a clean VS Code
+        run: xvfb-run -a npm run test:semantic
       - run: npm run package

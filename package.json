@@ -34,11 +34,16 @@
     "dev": "tsx watch src/build.ts",
     "check": "tsx src/check.ts",
     "typecheck": "tsc --noEmit",
-    "package": "vsce package --allow-missing-repository"
+    "package": "vsce package --allow-missing-repository",
+    "test": "tsx --test test/textmate.test.ts",
+    "test:semantic": "tsx test/semantic/run.ts",
+    "scopes": "tsx test/scopes.ts"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@vscode/test-electron": "^3.1.0",
     "@vscode/vsce": "^3.2.0",
+    "shiki": "^3.23.0",
     "tsx": "^4.19.0",
     "typescript": "^5.6.0"
   },

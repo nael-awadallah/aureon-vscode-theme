@@ -1,0 +1,10 @@
+{
+  "name": "aureon",
+  "version": 2,
+  "enabled": true,
+  "accent": null,
+  "colors": {
+    "gold": "#E5B567",
+    "roles": ["function", "type"]
+  }
+}

@@ -32,6 +32,9 @@ The theme JSON files in `themes/` are generated, so don't edit them by hand.
 npm install
 npm run dev      # rebuild themes/ on every save
 npm run check    # WCAG contrast check
+npm test         # TextMate colors for every file in samples/
+npm run test:semantic   # semantic tokens in a clean VS Code, no extensions
+npm run scopes -- semantic.ts   # print each token's scopes and color
 ```
 
 Press `F5` in VS Code to open an Extension Development Host on `samples/` with Aureon Dark applied. While `npm run dev` runs, saved palette edits reload live.

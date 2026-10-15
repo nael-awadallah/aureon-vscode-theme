@@ -21,7 +21,12 @@ class Palette:
         return len(self.colors)
 
 
+def build(name: str) -> Palette:
+    palette = Palette(name)
+    palette.add("gold", "#e5b567")
+    return palette
+
+
 if __name__ == "__main__":
-    aureon = Palette("Aureon Dark")
-    aureon.add("gold", "#e5b567")
+    aureon = build("Aureon Dark")
     print(aureon.size, True, None)

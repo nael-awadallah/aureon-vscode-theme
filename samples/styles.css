@@ -1,0 +1,19 @@
+/* Aureon sample styles */
+:root {
+  --gold: #e5b567;
+  --radius: 8px;
+}
+
+.card > h1,
+#hero a:hover {
+  color: var(--gold);
+  border-radius: calc(var(--radius) * 2);
+  margin: 0 auto 1.5rem;
+  font-family: "Geist Mono", monospace !important;
+}
+
+@media (max-width: 600px) {
+  .card {
+    display: none;
+  }
+}
