@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Aureon</title>
+    <style>
+      :root {
+        --gold: #e5b567;
+      }
+      .hero > h1:hover {
+        color: var(--gold);
+        margin: 0 auto 1.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Hero section -->
+    <section class="hero" id="top" data-theme="dark">
+      <h1>Aureon <span>Dark</span></h1>
+      <a href="https://marketplace.visualstudio.com" target="_blank">Install</a>
+    </section>
+    <script>
+      document.querySelector(".hero").addEventListener("click", () => console.log("clicked", 42));
+    </script>
+  </body>
+</html>

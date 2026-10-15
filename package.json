@@ -1,0 +1,59 @@
+{
+  "name": "aureon-theme",
+  "displayName": "Aureon Theme",
+  "description": "A refined, modern theme family with warm gold accents — elegant, readable, and easy on the eyes.",
+  "publisher": "nael-awadallah",
+  "version": "0.0.1",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.86.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "keywords": [
+    "theme",
+    "dark",
+    "gold",
+    "warm",
+    "elegant",
+    "color-theme"
+  ],
+  "galleryBanner": {
+    "color": "#141311",
+    "theme": "dark"
+  },
+  "files": [
+    "themes/*.json",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsx src/build.ts",
+    "dev": "tsx watch src/build.ts",
+    "check": "tsx src/check.ts",
+    "typecheck": "tsc --noEmit",
+    "package": "vsce package --allow-missing-repository"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vscode/vsce": "^3.2.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Aureon Dark",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aureon-dark.json"
+      },
+      {
+        "label": "Aureon Dark Vivid",
+        "uiTheme": "vs-dark",
+        "path": "./themes/aureon-dark-vivid.json"
+      }
+    ]
+  }
+}
